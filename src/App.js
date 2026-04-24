@@ -516,8 +516,9 @@ function ThreatMap() {
               src="https://threatmap.checkpoint.com/"
               style={{
                 width: "100%",
-                height: "130%",
-                border: "2px solid rgba(255,68,68,0.1)",
+                
+                height: "100%",
+                border: "2px solid rgba(59, 59, 59, 0.1)",
               }}
               title="Live Cyber Threat Map"
             />
@@ -570,44 +571,69 @@ const SERVICES = [
 
 function Services() {
   return (
-    <section id="services" className="section services">
-      <div className="container">
+  <section id="services" className="section services">
+    <div className="container">
+
+      {/* ✅ Wrap heading for better control */}
+      <div className="section__header">
+        <h2 className="services__heading">
+  Detect{" "}
+  <span className="icon">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
+    </svg>
+  </span>
+  {" "}Respond{" "}
+  <span className="icon">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
+    </svg>
+  </span>
+  {" "}Eliminate.
+</h2>
+
+        {/* ✅ Move canvas inside header properly */}
         <ThreatMapCanvas />
-        <div className="section__header">
-          <h2>
-            Detect{" "}
-            {/* FIX: stroke-width → strokeWidth, class → className */}
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M12 9v-3.586a1 1 0 0 1 1.707-.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1-1.707-.707v-3.586h-3v-6h3" />
-              <path d="M3 9v6" />
-              <path d="M6 9v6" />
-            </svg>{" "}
-            Respond{" "}
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M12 9v-3.586a1 1 0 0 1 1.707-.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1-1.707-.707v-3.586h-3v-6h3" />
-              <path d="M3 9v6" />
-              <path d="M6 9v6" />
-            </svg>{" "}
-            Eliminate.
-          </h2>
-        </div>
-        <div className="services__grid">
-          {SERVICES.map((s) => (
-            <div key={s.num} className="service-card glass-card">
-              <div className="service-card__svg-icon">{s.icon}</div>
-              <h3 className="service-card__title">{s.title}</h3>
-              <p className="service-card__desc">{s.desc}</p>
-              <div className="service-card__tags">
-                {s.tags.map((t) => <span key={t} className="tag tag--dim">{t}</span>)}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
-    </section>
-  );
+
+      {/* ✅ Services Grid */}
+      <div className="services__grid">
+        {SERVICES.map((s) => (
+          <div key={s.num} className="service-card glass-card">
+            <div className="service-card__svg-icon">{s.icon}</div>
+            <h3 className="service-card__title">{s.title}</h3>
+            <p className="service-card__desc">{s.desc}</p>
+
+            <div className="service-card__tags">
+              {s.tags.map((t) => (
+                <span key={t} className="tag tag--dim">{t}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+);
 }
 
 /* ── Ticketing ────────────────────────────────────────────────────────────── */
