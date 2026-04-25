@@ -583,7 +583,7 @@ function Services() {
       <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
     </svg>
   </span>
-  {" "}Eliminate
+  {" "} <span style={{ color: "#C91D22" }}>Eliminate</span>
 </h2>
 
         {/* ✅ Move canvas inside header properly */}
@@ -784,7 +784,7 @@ function Contact() {
     <section id="contact" className="section contact">
       <div className="container">
         <div className="section__header">
-          <h2>Get Your Free Security Assessment</h2>
+          <h2>Get Your <span style={{ color: "#C91D22" }}>Free Security Assessment</span></h2>
           <p>All requests go to <span className="green">support@fusionthreat.com</span> — we respond within 24 hours.</p>
         </div>
         <div className="contact__grid">

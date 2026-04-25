@@ -184,18 +184,18 @@ img { max-width: 100%; }
   gap: 7px;
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--red);
+  color: green;
   letter-spacing: 0.08em;
 }
 .pulse {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--red);
+  background: green;
   animation: pulse 1.5s ease-in-out infinite;
 }
 @keyframes pulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(255,68,68,0.6); }
+  0%,100% { box-shadow: 0 0 0 0 rgba(68, 255, 81, 0.6); }
   50% { box-shadow: 0 0 0 5px rgba(255,68,68,0); }
 }
 
@@ -342,7 +342,7 @@ img { max-width: 100%; }
 .metric-card__sub { font-family: var(--mono); font-size: 11px; color: var(--steel); opacity: 0.6; }
 
 .soc__alerts-panel { padding: 20px; grid-column: 2; display: flex; flex-direction: column; gap: 8px; }
-.soc__panel-title { font-family: var(--mono); font-size: 20px; color: var(--steel); letter-spacing: 0.08em; margin-bottom: 4px; opacity: 0.7; }
+.soc__panel-title { font-family: var(--mono); font-size: 20px; font-weight: 600; color: var(--steel); letter-spacing: 0.08em; margin-bottom: 4px; opacity: 0.7; }
 .soc__alert-list { display: flex; flex-direction: column; gap: 1px; flex: 1;
  }
 .soc__alert {
@@ -979,8 +979,8 @@ select.form__input option { background: #111; }
   display: inline-flex;
   font-family: var(--mono);
   font-size: 9px;
-  color: #000;
-  background: var(--red);
+  color: #fff;
+  background: green;
   padding: 1px 6px;
   border-radius: 3px;
   margin-left: 8px;
@@ -1253,7 +1253,6 @@ select.form__input option { background: #111; }
   justify-content: center;
   gap: 8px;
   text-align: center;
-  color: #ff4444;
 }
 
 .icon {
