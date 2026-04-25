@@ -296,7 +296,7 @@ function SOCDashboard() {
       <div className="container">
         <ThreatMapCanvas />
         <div className="section__header">
-          <h2>Real-Time Security Operations Center</h2>
+          <h2>Real-Time Security <span style={{ color: "#C91D22" }}>Operations</span> Center</h2>
           <p>Live metrics from our enterprise SOC — updated in real time.</p>
         </div>
         <div className="soc__grid">
@@ -645,7 +645,7 @@ function Ticketing() {
     <section id="ticketing" className="section ticketing">
       <div className="container">
         <div className="section__header">
-          <h2>Submit &amp; Track Security Tickets</h2>
+          <h2> <span style={{"color":"#C91D22"}}>Submit &amp; Track </span>Security Tickets</h2>
           <p>All tickets are sent to <span className="green">support@fusionthreat.com</span> and assigned to a dedicated analyst.</p>
         </div>
         <div className="ticketing__grid">
