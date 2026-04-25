@@ -627,24 +627,19 @@ function Ticketing() {
   const [error, setError] = useState("");
 
   const handleSubmit = async () => {
-    if (!form.name || !form.email || !form.title) return;
-    setLoading(true);
-    setError("");
-    try {
-      await sendTicketNotification(form);
-      setSubmitted(true);
-    } catch (err) {
-      // If EmailJS isn't configured yet, still show success in dev/demo mode
-      if (err.message && err.message.includes("not configured")) {
-        console.warn("EmailJS not configured — showing demo success state.");
-        setSubmitted(true);
-      } else {
-        setError("Failed to submit ticket. Please email support@fusionthreat.com directly.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (!form.name || !form.email || !form.title) return;
+  setLoading(true);
+  setError("");
+  try {
+    await sendTicketNotification(form);
+    setSubmitted(true);
+  } catch (err) {
+    console.error("Ticket submission error:", err);
+    setError("Failed to submit ticket. Please email support@fusionthreat.com directly.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <section id="ticketing" className="section ticketing">
@@ -763,25 +758,28 @@ function Contact() {
   const [error, setError] = useState("");
 
   const handleBook = async () => {
-    if (!form.name || !form.email) return;
-    setLoading(true);
-    setError("");
-    try {
-      await handleConsultationBooking({ ...form, selectedSlot: slot });
-      setSent(true);
-    } catch (err) {
-      // Graceful demo/dev fallback when EmailJS isn't wired up yet
-      if (err.message && err.message.includes("not configured")) {
-        console.warn("EmailJS not configured — showing demo success state.");
-        setSent(true);
-      } else {
-        setError("Could not send your request. Please email support@fusionthreat.com directly.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (!form.name || !form.email) return;
+  setLoading(true);
+  setError("");
+  try {
+    await handleConsultationBooking({ ...form, selectedSlot: slot });
+    setSent(true);
 
+    // Reset form after 5 seconds
+    setTimeout(() => {
+      setSent(false);
+      setSlot("");
+      setForm({ name: "", email: "", company: "", size: "1–50", concern: "" });
+      setError("");
+    }, 5000);
+
+  } catch (err) {
+    console.error("Booking error:", err);
+    setError("Could not send your request. Please email support@fusionthreat.com directly.");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <section id="contact" className="section contact">
       <div className="container">

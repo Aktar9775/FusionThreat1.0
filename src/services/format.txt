@@ -1,0 +1,83 @@
+<div style="font-family: system-ui, sans-serif, Arial; font-size: 12px">
+
+  <!-- CONSULTATION LAYOUT -->
+  {{#if consultation}}
+  <div>A consultation booking from <strong>{{client_name}}</strong> has been received. Kindly respond at your earliest convenience.</div>
+  <div style="margin-top: 20px; padding: 15px 0; border-width: 1px 0; border-style: dashed; border-color: lightgrey;">
+    <table role="presentation" style="width: 100%;">
+      <tr>
+        <td style="vertical-align: top;">
+          <div style="padding: 6px 10px; margin: 0 10px; background-color: aliceblue; border-radius: 5px; font-size: 26px;">👤</div>
+        </td>
+        <td style="vertical-align: top;">
+          <div style="color: #2c3e50; font-size: 16px;"><strong>{{client_name}}</strong></div>
+          <div style="color: #cccccc; font-size: 13px;">{{submission_date}}</div>
+          <table role="presentation" style="width: 100%; margin-top: 15px;">
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong style="color: #2c3e50;">Email:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;">{{client_email}}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong style="color: #2c3e50;">Company:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;">{{client_company}}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong style="color: #2c3e50;">Team Size:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;">{{client_team_size}}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong style="color: #2c3e50;">Scheduled Slot:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;">{{selected_slot}}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0;"><strong style="color: #2c3e50;">Security Concern:</strong></td>
+              <td style="padding: 8px 0;">{{client_concern}}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  {{/if}}
+
+  <!-- TICKET LAYOUT -->
+  {{#if ticket}}
+  <div>A new security ticket from <strong>{{client_name}}</strong> has been submitted. Please review and assign to an analyst.</div>
+  <div style="margin-top: 20px; padding: 15px 0; border-width: 1px 0; border-style: dashed; border-color: lightgrey;">
+    <table role="presentation" style="width: 100%;">
+      <tr>
+        <td style="vertical-align: top;">
+          <div style="padding: 6px 10px; margin: 0 10px; background-color: #fff0f0; border-radius: 5px; font-size: 26px;">🎫</div>
+        </td>
+        <td style="vertical-align: top;">
+          <div style="color: #2c3e50; font-size: 16px;"><strong>{{client_name}}</strong></div>
+          <div style="color: #cccccc; font-size: 13px;">{{submission_date}}</div>
+          <table role="presentation" style="width: 100%; margin-top: 15px;">
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong style="color: #2c3e50;">Email:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;">{{client_email}}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong style="color: #2c3e50;">Priority:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;">{{ticket_priority}}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong style="color: #2c3e50;">Category:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;">{{ticket_category}}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;"><strong style="color: #2c3e50;">Issue Title:</strong></td>
+              <td style="padding: 8px 0; border-bottom: 1px solid #f0f0f0;">{{ticket_title}}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0;"><strong style="color: #2c3e50;">Description:</strong></td>
+              <td style="padding: 8px 0;">{{ticket_description}}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  {{/if}}
+
+</div>
