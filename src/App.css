@@ -1275,3 +1275,28 @@ select.form__input option { background: #111; }
     color: #ff4444;
   }
 }
+.threatmap {
+  width: 100%;
+  height: 100vh; /* full screen */
+  position: relative;
+  overflow: hidden;
+}
+
+.threatmap__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.threatmap__iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  z-index: 1;
+}
+@media (max-width: 768px) {
+  .threatmap__frame {
+    height: 300px; /* perfect mobile height */
+  }
+}

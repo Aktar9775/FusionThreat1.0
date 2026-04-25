@@ -487,45 +487,21 @@ function ThreatMapCanvas() {
  
 function ThreatMap() {
   return (
-    <section id="threatmap" className="section threatmap">
-      <div className="container">
-        <div className="section__header">
-       
-          <h2>Live Threat Map</h2>
-          <p>Real-time visualization of global attack origins and blocked threats across our client network.</p>
-        </div>
- 
-        {/* outer wrapper — positions the canvas behind the iframe */}
-       
-          {/* animated red-dot canvas — same particles as hero */}
-          
- 
-          {/* iframe sits on top of the canvas */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              transform: "scale(1.3)",
-              transformOrigin: "center center",
-              width: "100%",
-              height: "100%",
-              zIndex: 1,
-            }}
-          >
-            <iframe
-              src="https://threatmap.checkpoint.com/"
-              style={{
-                width: "100%",
-                
-                height: "100%",
-                border: "2px solid rgba(59, 59, 59, 0.1)",
-              }}
-              title="Live Cyber Threat Map"
-            />
-          </div>
-        </div>
-      
-    </section>
+    <section id="threatmap" className="threatmap">
+  <div className="threatmap__container">
+
+    {/* Canvas background */}
+    <ThreatMapCanvas />
+
+    {/* Iframe */}
+    <iframe
+      src="https://threatmap.checkpoint.com/"
+      title="Live Cyber Threat Map"
+      className="threatmap__iframe"
+    />
+
+  </div>
+</section>
   );
 }
 
