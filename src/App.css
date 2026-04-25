@@ -5,13 +5,13 @@
   --bg: #080c0a;
   --bg2: #0d1310;
   --bg3: #111a14;
-  --red: #ff4444;
-  --red-dim: #cc2222;
+  --red: #C91D22;
+  --red-dim: #C91D22;
   --red-glow: rgba(255,68,68,0.15);
   --steel: #a0a8b0;
   --steel-light: #c8d0d8;
   --steel-dim: #707880;
-  --green: #ff4444;
+  --green: #C91D22;
   --green-dim: #cc2222;
   --green-glow: rgba(255,68,68,0.15);
   --yellow: #ffcc00;
@@ -110,7 +110,7 @@ img { max-width: 100%; }
 /* ── Section ──────────────────────────────────────────────────────────────── */
 .section { padding: 100px 0; position: relative; }
 .section:nth-child(even) { background: var(--bg2); }
-.section__header { text-align: center; margin-bottom: 60px; }
+.section__header { text-align: center; margin-bottom: 60px;  }
 .section__tag {
   font-family: var(--mono);
   font-size: 12px;
@@ -121,8 +121,8 @@ img { max-width: 100%; }
 }
 .section__header h2 {
   font-family: var(--head);
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 700;
+  font-size: clamp(34px, 4vw, 44px);
+  font-weight: 800;
   letter-spacing: 0.02em;
   margin-bottom: 14px;
 }
@@ -340,8 +340,9 @@ img { max-width: 100%; }
 .metric-card__sub { font-family: var(--mono); font-size: 11px; color: var(--steel); opacity: 0.6; }
 
 .soc__alerts-panel { padding: 20px; grid-column: 2; display: flex; flex-direction: column; gap: 8px; }
-.soc__panel-title { font-family: var(--mono); font-size: 11px; color: var(--steel); letter-spacing: 0.08em; margin-bottom: 4px; opacity: 0.7; }
-.soc__alert-list { display: flex; flex-direction: column; gap: 1px; flex: 1; }
+.soc__panel-title { font-family: var(--mono); font-size: 20px; color: var(--steel); letter-spacing: 0.08em; margin-bottom: 4px; opacity: 0.7; }
+.soc__alert-list { display: flex; flex-direction: column; gap: 1px; flex: 1;
+ }
 .soc__alert {
   display: flex;
   align-items: flex-start;
@@ -368,9 +369,9 @@ img { max-width: 100%; }
 .soc__alert--high .soc__alert-dot { background: var(--yellow); }
 .soc__alert--medium .soc__alert-dot { background: var(--cyan); }
 .soc__alert--info .soc__alert-dot { background: var(--red); }
-.soc__alert-msg { flex: 1; font-family: var(--mono); line-height: 1.4; color: var(--text-sec); }
-.soc__alert--active .soc__alert-msg { color: var(--text); }
-.soc__alert-time { font-family: var(--mono); font-size: 10px; color: var(--dim); flex-shrink: 0; }
+.soc__alert-msg { flex: 1; font-family: var(--mono); line-height: 1.4; color: var(--text-sec); font-size: 15px;}
+.soc__alert--active .soc__alert-msg { color: var(--text);  }
+.soc__alert-time { font-family: var(--mono); font-size: 15px; color: var(--dim); flex-shrink: 0; }
 .soc__resp-time {
   display: flex;
   align-items: center;
@@ -392,7 +393,7 @@ img { max-width: 100%; }
   background: rgba(255,255,255,0.02);
 }
 .soc__status-icon { font-size: 14px; }
-.soc__status-name { flex: 1; font-size: 13px; }
+.soc__status-name { flex: 1; font-size: 14px; }
 .soc__status-badge { font-family: var(--mono); font-size: 10px; }
 .badge--green { color: var(--red); }
 .badge--yellow { color: var(--yellow); }
@@ -502,8 +503,8 @@ img { max-width: 100%; }
 .ticket__meta .dim { font-size: 12px; }
 
 .ticketing__form { padding: 28px; display: flex; flex-direction: column; gap: 12px; }
-.form__title { font-family: var(--head); font-size: 18px; font-weight: 600; margin-bottom: 4px; }
-.form__label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; }
+.form__title { font-family: var(--head); font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+.form__label { font-family: var(--mono); font-size: 14px; letter-spacing: 0.06em; }
 .form__input {
   width: 100%;
   background: rgba(255,255,255,0.03);
@@ -522,7 +523,7 @@ select.form__input { cursor: pointer; appearance: none; background-image: url("d
 select.form__input option { background: #111; }
 .form__textarea { resize: vertical; min-height: 90px; }
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.form__note { font-family: var(--mono); font-size: 11px; }
+.form__note { font-family: var(--mono); font-size: 14px; }
 .form__success {
   display: flex;
   flex-direction: column;
@@ -577,19 +578,19 @@ select.form__input option { background: #111; }
 /* ── Contact ──────────────────────────────────────────────────────────────── */
 .contact__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
 .contact__info { padding: 32px; }
-.contact__info h3 { font-family: var(--head); font-size: 20px; font-weight: 600; margin-bottom: 14px; line-height: 1.4; }
-.contact__info > p { font-size: 14px; color: var(--text-sec); margin-bottom: 24px; }
+.contact__info h3 { font-family: var(--head); font-size: 40px; font-weight: 600; margin-bottom: 14px; line-height: 1.4; }
+.contact__info > p { font-size: 19px; color: var(--text-sec); margin-bottom: 24px; }
 .contact__benefits { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-.contact__benefits li { display: flex; gap: 10px; font-size: 14px; color: var(--text-sec); }
+.contact__benefits li { display: flex; gap: 10px; font-size: 19px; color: var(--text-sec); }
 .contact__direct { border-top: 1px solid var(--glass-border); padding-top: 18px; display: flex; flex-direction: column; gap: 8px; }
-.contact__direct-title { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; }
-.contact__link { font-family: var(--mono); font-size: 13px; color: var(--green); opacity: 0.8; transition: opacity var(--transition); }
+.contact__direct-title { font-family: var(--mono); font-size: 16px; letter-spacing: 0.1em; }
+.contact__link { font-family: var(--mono); font-size: 16px; color: var(--green); opacity: 0.8; transition: opacity var(--transition); }
 .contact__link:hover { opacity: 1; }
 .contact__form { padding: 28px; display: flex; flex-direction: column; gap: 12px; }
 .slot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .slot-btn {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 14px;
   padding: 8px 4px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
@@ -1096,8 +1097,8 @@ select.form__input option { background: #111; }
 
 /* ── Service Status SVG Icons ─────────────────────────────────────────────── */
 .svc-icon {
-  width: 28px;
-  height: 28px;
+  width: 45px;
+  height: 45px;
   padding: 5px;
   border-radius: 6px;
   flex-shrink: 0;

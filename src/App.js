@@ -363,7 +363,7 @@ function ThreatMapCanvas() {
  
     const mkDot = (forceEdge = false) => {
       const r = 1.5 + Math.random() * 3.5;          // radius 1.5–5px
-      const speed = 0.18 + Math.random() * 0.55;
+      const speed = 0.10 + Math.random() * 0.30;
       const angle = Math.random() * Math.PI * 2;
       const x = forceEdge
         ? Math.random() < 0.5 ? -r : W + r
@@ -607,7 +607,7 @@ function Services() {
       <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
     </svg>
   </span>
-  {" "}Eliminate.
+  {" "}Eliminate
 </h2>
 
         {/* ✅ Move canvas inside header properly */}
