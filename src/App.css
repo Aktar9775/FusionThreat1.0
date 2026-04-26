@@ -1332,12 +1332,11 @@ select.form__input option { background: #111; }
 
 
 .services__heading {
-  display: flex;
-  flex-wrap: wrap; /* important for mobile */
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  font-size: clamp(20px, 5vw, 42px);
+  font-weight: 700;
   text-align: center;
+  line-height: 1.3;
+  padding: 0 10px;
 }
 
 .icon {

@@ -790,7 +790,7 @@ function Contact() {
         </div>
         <div className="contact__grid">
           <div className="contact__info glass-card">
-            <h3>Free 30-minute consultation with our senior security architects</h3>
+            <h3><span className="green">Free 30-minute consultation</span> with our senior security architects</h3>
             <p className="dim">We'll evaluate your current environment, identify immediate risks, and provide a custom recommendation — completely free, no obligation.</p>
             <ul className="contact__benefits">
               {["Current security posture review", "Industry-specific threat analysis", "Compliance gap identification", "Custom pricing & service recommendation", "30-day pilot program available"].map((b) => (
@@ -894,16 +894,49 @@ function Footer() {
               <span className="tag tag--dim">NIST CSF</span>
             </div>
           </div>
-          {[
-            { title: "Services", links: ["24/7 Monitoring", "Incident Response", "Vulnerability Mgmt", "Compliance", "Threat Hunting"] },
-            { title: "Platform", links: ["SOC Dashboard", "Threat Map", "Ticketing", "Pricing", "Client Portal"] },
-            { title: "Contact", links: ["support@fusionthreat.com", "www.fusionthreat.com", "Book Assessment", "Submit Ticket", "Client Login"] },
-          ].map((col) => (
-            <div key={col.title} className="footer__col">
-              <h4 className="footer__col-title">{col.title}</h4>
-              <ul>{col.links.map((l) => <li key={l}><a href="#hero" className="dim">{l}</a></li>)}</ul>
-            </div>
-          ))}
+         {[
+  {
+    title: "Services",
+    links: [
+      { label: "24/7 Monitoring",     href: "#services" },
+      { label: "Incident Response",   href: "#services" },
+      { label: "Vulnerability Mgmt",  href: "#services" },
+      { label: "Compliance",          href: "#services" },
+      { label: "Threat Hunting",      href: "#services" },
+    ]
+  },
+  {
+    title: "Platform",
+    links: [
+      { label: "SOC Dashboard",  href: "#socdashboard" },
+      { label: "Threat Map",     href: "#threatmap" },
+      { label: "Ticketing",      href: "#ticketing" },
+      { label: "Pricing",        href: "#pricing" },
+      { label: "Client Portal",  href: "ClientPage.html" },
+    ]
+  },
+  {
+    title: "Contact",
+    links: [
+      { label: "support@fusionthreat.com", href: "mailto:support@fusionthreat.com" },
+      { label: "www.fusionthreat.com",     href: "https://www.fusionthreat.com" },
+      { label: "Book Assessment",          href: "#contact" },
+      { label: "Submit Ticket",            href: "#ticketing" },
+      { label: "Client Login",             href: "ClientPage.html" },
+    ]
+  },
+].map((col) => (
+  <div key={col.title} className="footer__col">
+    <h4 className="footer__col-title">{col.title}</h4>
+    <ul>
+      {col.links.map((l) => (
+        <li key={l.label}>
+          <a href={l.href} className="dim">{l.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+))}
         </div>
         <div className="footer__bottom">
           <span className="dim">© 2026 FUSIONTHREAT. ALL RIGHTS RESERVED.</span>
