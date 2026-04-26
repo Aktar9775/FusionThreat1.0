@@ -7,6 +7,12 @@ const getConfig = () => ({
   publicKey: import.meta.env.REACT_APP_EMAILJS_PUBLIC_KEY,
 });
 
+console.log("CONFIG DEBUG:", {
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateAdmin: import.meta.env.VITE_EMAILJS_TEMPLATE_ADMIN,
+  templateUser: import.meta.env.VITE_EMAILJS_TEMPLATE_USER,
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+});
 const isConfigured = () => {
   const { serviceId, templateAdmin, templateUser, publicKey } = getConfig();
   return !!(serviceId && templateAdmin && templateUser && publicKey);
