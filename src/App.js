@@ -44,7 +44,7 @@ function Nav() {
       <div className="nav__inner">
         <a href="#hero" className="nav__logo" style={{ display: "flex", alignItems: "left", gap: "0" }}>
           <img src="/loc.png" alt="FusionThreat Logo" style={{ width: "100px", height: "100px", objectFit: "contain" }} />
-          <span style={{ fontFamily: "var(--head)", fontSize: "18px", fontWeight: "600", letterSpacing: "0.02em" }}>
+          <span style={{ fontFamily: "var(--head)", fontWeight: "600", letterSpacing: "0.02em" }}>
             Fusion<strong style={{ color: "var(--red)" }}>Threat</strong>
           </span>
         </a>
@@ -55,15 +55,16 @@ function Nav() {
             </li>
           ))}
         </ul>
+        <div className="nav__right">
         <div className="nav__actions">
           <span className="nav__live">
             <span className="pulse" />SOC LIVE
           </span>
-          <a href="#contact" className="btn btn--sm btn--primary">Get Protected</a>
+          <a href="#contact" className=" nav_protected btn btn--sm btn--primary">Get Protected</a>
           <button className="nav__burger" onClick={() => setOpen(!open)}>
             <span /><span /><span />
           </button>
-        </div>
+        </div></div>
       </div>
     </nav>
   );
@@ -102,7 +103,7 @@ function Hero() {
       <div className="hero__glow" />
       <div className="hero__shield-wrap">
         <div className="hero__shield-glow" />
-        <img src="/loc.png" alt="FusionThreat Shield" className="hero__shield-svg" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+        <img src="/loc.png" alt="FusionThreat Shield" className="hero__shield-svg" style={{  marginTop:"15%", objectFit: "contain" }} />
         <div className="hero__shield-brand">
           <span className="hero__shield-name">Fusion<strong>Threat</strong></span>
           <span className="hero__shield-tagline">NEXT-GEN CYBER DEFENSE</span>

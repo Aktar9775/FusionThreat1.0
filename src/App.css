@@ -178,6 +178,13 @@ img { max-width: 100%; }
 }
 .nav__links a:hover { color: var(--red); }
 .nav__actions { display: flex; align-items: center; gap: 14px; }
+.nav_protected{
+  font-family: var(--mono);
+  font-size: 11px;
+  color: white;
+  letter-spacing: 0.08em;
+}
+
 .nav__live {
   display: flex;
   align-items: center;
@@ -187,6 +194,7 @@ img { max-width: 100%; }
   color: green;
   letter-spacing: 0.08em;
 }
+
 .pulse {
   width: 7px;
   height: 7px;
@@ -655,6 +663,19 @@ select.form__input option { background: #111; }
   .services__grid { grid-template-columns: repeat(2, 1fr); }
   .pricing__grid { grid-template-columns: repeat(2, 1fr); }
   .threatmap__svg { height: 320px; }
+  .hero__shield-wrap {
+    width: 460px;
+    height: 460px;
+    margin-top: 10px;
+  }
+  .hero__shield-name {
+    font-size: 32px;
+  }
+  .hero__shield-tagline {
+    font-size: 14px;
+    letter-spacing: 0.15em;
+  }
+
 }
 
 /* TABLET LANDSCAPE: 768px and below */
@@ -686,7 +707,7 @@ select.form__input option { background: #111; }
   .nav__links--open { transform: translateY(0); opacity: 1; pointer-events: all; }
   .nav__links a { font-size: 12px; }
   .nav__burger { display: flex; }
-  .nav__live { display: none; }
+ .nav__live { font-size: 10px; gap: 5px; letter-spacing: 0.04em; }
   .nav__actions { gap: 10px; }
   
   /* Hero */
@@ -700,6 +721,30 @@ select.form__input option { background: #111; }
   .hero__stat-val { font-size: 22px; }
   .hero__stat-label { font-size: 10px; }
   .hero__shield-wrap { width: 250px; height: 250px; }
+   .hero__shield-wrap {
+    width: 340px;
+    height: 340px;
+    top: 42%;
+    margin-top: 0;
+   
+  }
+  .hero__shield-svg {
+    opacity: 0.08;
+  }
+  .hero__shield-brand {
+    margin-top: 140px;
+  }
+  .hero__shield-name {
+    font-size: 26px;
+    letter-spacing: 0.03em;
+  }
+  .hero__shield-tagline {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+  }
+  .hero__shield-logo-icon {
+    font-size: 22px;
+  }
   
   /* SOC */
   .soc__grid { grid-template-columns: 1fr; }
@@ -759,10 +804,10 @@ select.form__input option { background: #111; }
   
   /* Navigation */
   .nav__inner { height: 56px; padding: 0 12px; gap: 12px; }
-  .nav__logo { font-size: 14px; gap: 6px; }
-  .nav__logo img { width: 40px !important; height: 40px !important; }
+  .nav__logo { font-size: 15px; gap: 6px; }
+  .nav__logo img { width: 32px !important; height: 32px !important; }
   .nav__actions { gap: 8px; }
-  .btn--sm { padding: 6px 12px; font-size: 11px; }
+ .btn--sm { padding: 6px 12px; font-size: 10px; letter-spacing: 0.04em; }
   
   /* Hero */
   .hero__content { padding: 60px 14px 40px; }
@@ -774,6 +819,28 @@ select.form__input option { background: #111; }
   .hero__stat-val { font-size: 18px; }
   .hero__stat-label { font-size: 9px; }
   .hero__shield-wrap { width: 140px; height: 140px; }
+  .hero__shield-wrap {
+    width: 270px;
+    height: 270px;
+    top: 40%;
+  }
+  .hero__shield-glow {
+    inset: -20px;
+  }
+  .hero__shield-brand {
+    margin-top: 110px;
+    gap: 4px;
+  }
+  .hero__shield-name {
+    font-size: 22px;
+  }
+  .hero__shield-tagline {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+  .hero__shield-logo-icon {
+    font-size: 20px;
+  }
   
   /* SOC */
   .soc__grid { grid-template-columns: 1fr; gap: 12px; }
@@ -838,9 +905,12 @@ select.form__input option { background: #111; }
   
   /* Navigation */
   .nav__inner { height: 52px; padding: 0 10px; }
-  .nav__logo { font-size: 13px; }
-  .nav__logo img { width: 32px !important; height: 32px !important; }
-  .nav__logo strong { font-size: 13px; }
+  .nav__logo { font-size: 12px; gap: 5px; }
+  .nav__logo img { width: 48px !important; height: 48px !important; }
+  .nav__logo strong { font-size: 12px; }
+  .btn--sm { padding: 6px 10px; font-size: 10px; white-space: nowrap; }
+  .nav__live { font-size: 7px; gap: 5px; }
+  .pulse { width: 6px; height: 6px; }
   
   /* Hero */
   .hero__content { padding: 50px 12px 30px; }
@@ -852,7 +922,14 @@ select.form__input option { background: #111; }
   .hero__stat-val { font-size: 16px; }
   .hero__stat-label { font-size: 8px; }
   .hero__ctas { gap: 8px; }
-  .hero__shield-wrap { width: 110px; height: 110px; }
+  .hero__shield-wrap { width: 220px; height: 220px; top: 38%; }
+  .hero__shield-brand { margin-top: 88px; gap: 3px; }
+  .hero__shield-name { font-size: 17px; }
+  .hero__shield-tagline { font-size: 10px; letter-spacing: 0.10em; }
+  .hero__shield-logo-icon { font-size: 17px; }
+  .hero__shield-svg { opacity: 0.06; }
+  .hero__shield-glow { inset: -10px; }
+  
   
   /* SOC */
   .soc__metrics { gap: 10px; }
@@ -891,6 +968,14 @@ select.form__input option { background: #111; }
   .scroll-to-top { width: 44px; height: 44px; bottom: 20px; right: 20px; }
   .scroll-to-top svg { width: 20px; height: 20px; }
 }
+
+
+
+
+
+
+
+
 
 /* ── Alert Popup Toast ────────────────────────────────────────────────────── */
 .alert-popup {
@@ -1195,8 +1280,8 @@ select.form__input option { background: #111; }
 .hero__shield-svg {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   color: #bcc1c6;
   opacity: 0.1;
   filter: drop-shadow(0 0 18px rgba(255, 60, 0, 0.35));
@@ -1300,4 +1385,11 @@ select.form__input option { background: #111; }
   .threatmap__frame {
     height: 300px; /* perfect mobile height */
   }
+}
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
