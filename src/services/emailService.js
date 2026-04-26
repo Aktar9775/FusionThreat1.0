@@ -1,10 +1,10 @@
 import emailjs from '@emailjs/browser';
 
 const getConfig = () => ({
-  serviceId: process.env.REACT_APP_EMAILJS_SERVICE_ID,
-  templateAdmin: process.env.REACT_APP_EMAILJS_TEMPLATE_ADMIN,
-  templateUser: process.env.REACT_APP_EMAILJS_TEMPLATE_USER,
-  publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
+  serviceId: import.meta.env.REACT_APP_EMAILJS_SERVICE_ID,
+  templateAdmin: import.meta.env.REACT_APP_EMAILJS_TEMPLATE_ADMIN,
+  templateUser: import.meta.env.REACT_APP_EMAILJS_TEMPLATE_USER,
+  publicKey: import.meta.env.REACT_APP_EMAILJS_PUBLIC_KEY,
 });
 
 const isConfigured = () => {
