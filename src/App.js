@@ -297,7 +297,7 @@ function SOCDashboard() {
       <div className="container">
         <ThreatMapCanvas />
         <div className="section__header">
-          <h2>Real-Time Security <span style={{ color: "#C91D22" }}>Operations</span> Center</h2>
+          <h2>Real-Time Security <span style={{ color: "#f7161e" }}>Operations</span> Center</h2>
           <p>Live metrics from our enterprise SOC — updated in real time.</p>
         </div>
         <div className="soc__grid">
@@ -584,7 +584,7 @@ function Services() {
       <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
     </svg>
   </span>
-  {" "} <span style={{ color: "#C91D22" }}>Eliminate</span>
+  {" "} <span style={{ color: "#f7161e" }}>Eliminate</span>
 </h2>
 
         {/* ✅ Move canvas inside header properly */}
@@ -646,7 +646,7 @@ function Ticketing() {
     <section id="ticketing" className="section ticketing">
       <div className="container">
         <div className="section__header">
-          <h2> <span style={{"color":"#C91D22"}}>Submit &amp; Track </span>Security Tickets</h2>
+          <h2> <span style={{"color":"#f7161e"}}>Submit &amp; Track </span>Security Tickets</h2>
           <p>All tickets are sent to <span className="green">support@fusionthreat.com</span> and assigned to a dedicated analyst.</p>
         </div>
         <div className="ticketing__grid">
@@ -785,7 +785,7 @@ function Contact() {
     <section id="contact" className="section contact">
       <div className="container">
         <div className="section__header">
-          <h2>Get Your <span style={{ color: "#C91D22" }}>Free Security Assessment</span></h2>
+          <h2>Get Your <span style={{ color: "#f7161e" }}>Free Security Assessment</span></h2>
           <p>All requests go to <span className="green">support@fusionthreat.com</span> — we respond within 24 hours.</p>
         </div>
         <div className="contact__grid">

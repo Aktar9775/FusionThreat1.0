@@ -12,7 +12,7 @@
   --steel: #e5eaef;
   --steel-light: #b4b8bd;
   --steel-dim: #dee2e7;
-  --green: #ca060c;
+  --green: #f7161e;
   --green-dim: #ca060c;
   --green-glow: rgba(255,68,68,0.15);
   --yellow: #ffcc00;
@@ -729,7 +729,7 @@ select.form__input option { background: #111; }
    
   }
   .hero__shield-svg {
-    opacity: 0.08;
+    opacity: 1;
   }
   .hero__shield-brand {
     margin-top: 140px;
@@ -825,7 +825,7 @@ select.form__input option { background: #111; }
     top: 40%;
   }
   .hero__shield-glow {
-    inset: -20px;
+    inset: 0px;
   }
   .hero__shield-brand {
     margin-top: 110px;
@@ -927,7 +927,7 @@ select.form__input option { background: #111; }
   .hero__shield-name { font-size: 17px; }
   .hero__shield-tagline { font-size: 10px; letter-spacing: 0.10em; }
   .hero__shield-logo-icon { font-size: 17px; }
-  .hero__shield-svg { opacity: 0.06; }
+  .hero__shield-svg { opacity: 1; }
   .hero__shield-glow { inset: -10px; }
   
   
