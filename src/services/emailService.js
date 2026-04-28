@@ -1,5 +1,7 @@
 import emailjs from '@emailjs/browser';
 
+/* ================= CONFIG ================= */
+
 const getConfig = () => ({
   serviceId: process.env.REACT_APP_EMAILJS_SERVICE_ID,
   templateAdmin: process.env.REACT_APP_EMAILJS_TEMPLATE_ADMIN,
@@ -12,14 +14,28 @@ const isConfigured = () => {
   return !!(serviceId && templateAdmin && templateUser && publicKey);
 };
 
-export const sendAdminNotification = async (formData) => {
-  const { serviceId, templateAdmin, publicKey } = getConfig();
+/* ================= INIT (ONLY ONCE) ================= */
 
+let isInitialized = false;
+
+const initEmailJS = () => {
+  if (!isInitialized) {
+    const { publicKey } = getConfig();
+    emailjs.init(publicKey);
+    isInitialized = true;
+  }
+};
+
+/* ================= ADMIN EMAIL ================= */
+
+export const sendAdminNotification = async (formData) => {
   if (!isConfigured()) {
     throw new Error('EmailJS is not configured. Check your .env file.');
   }
 
-  emailjs.init(publicKey);
+  initEmailJS();
+
+  const { serviceId, templateAdmin } = getConfig();
 
   const templateParams = {
     to_email: 'support@fusionthreat.com',
@@ -32,22 +48,28 @@ export const sendAdminNotification = async (formData) => {
     submission_date: new Date().toLocaleString(),
   };
 
-  console.log('Sending consultation templateParams:', templateParams);
-  console.log('Using templateId:', templateAdmin);
+  console.log('Sending Admin Email:', templateParams);
 
-  const response = await emailjs.send(serviceId, templateAdmin, templateParams);
+  const response = await emailjs.send(
+    serviceId,
+    templateAdmin,
+    templateParams
+  );
+
   console.log('Admin notification sent:', response);
   return response;
 };
 
-export const sendUserConfirmation = async (formData) => {
-  const { serviceId, templateUser, publicKey } = getConfig();
+/* ================= USER CONFIRMATION ================= */
 
+export const sendUserConfirmation = async (formData) => {
   if (!isConfigured()) {
     throw new Error('EmailJS is not configured. Check your .env file.');
   }
 
-  emailjs.init(publicKey);
+  initEmailJS();
+
+  const { serviceId, templateUser } = getConfig();
 
   const templateParams = {
     to_email: formData.email,
@@ -60,25 +82,54 @@ export const sendUserConfirmation = async (formData) => {
     support_email: 'support@fusionthreat.com',
   };
 
-  const response = await emailjs.send(serviceId, templateUser, templateParams);
+  console.log('Sending User Confirmation:', templateParams);
+
+  const response = await emailjs.send(
+    serviceId,
+    templateUser,
+    templateParams
+  );
+
   console.log('User confirmation sent:', response);
   return response;
 };
 
-// ← Ticket form disabled until separate template is created on EmailJS dashboard
+/* ================= TICKET (SAFE PLACEHOLDER) ================= */
+
 export const sendTicketNotification = async (ticketData) => {
-  console.warn('Ticket notification is currently disabled. Create a separate EmailJS template to enable it.');
-  return { success: false, message: 'Ticket form is not yet configured.' };
+  console.warn(
+    '⚠️ Ticket notification is disabled. Create EmailJS template to enable.'
+  );
+
+  return {
+    success: false,
+    message: 'Ticket system not configured yet.',
+  };
 };
 
+/* ================= MAIN HANDLER ================= */
+
 export const handleConsultationBooking = async (formData) => {
-  await sendAdminNotification(formData);
+  try {
+    await sendAdminNotification(formData);
 
-  setTimeout(() => {
-    sendUserConfirmation(formData).catch((err) =>
-      console.error('Delayed user confirmation failed:', err)
-    );
-  }, 60_000);
+    // Send user email after delay (non-blocking)
+    setTimeout(() => {
+      sendUserConfirmation(formData).catch((err) =>
+        console.error('User email failed:', err)
+      );
+    }, 60000);
 
-  return { success: true, message: 'Consultation booked successfully!' };
+    return {
+      success: true,
+      message: 'Consultation booked successfully!',
+    };
+  } catch (error) {
+    console.error('Booking failed:', error);
+
+    return {
+      success: false,
+      message: 'Something went wrong. Please try again.',
+    };
+  }
 };
