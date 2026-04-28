@@ -1,142 +1,84 @@
-import emailjs from "@emailjs/browser";
+import emailjs from '@emailjs/browser';
 
-/* ================= CONFIG ================= */
+const getConfig = () => ({
+  serviceId: process.env.REACT_APP_EMAILJS_SERVICE_ID,
+  templateAdmin: process.env.REACT_APP_EMAILJS_TEMPLATE_ADMIN,
+  templateUser: process.env.REACT_APP_EMAILJS_TEMPLATE_USER,
+  publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
+});
 
-const getConfig = () => {
-  const config = {
-    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-    templateAdmin: import.meta.env.VITE_EMAILJS_TEMPLATE_ADMIN,
-    templateUser: import.meta.env.VITE_EMAILJS_TEMPLATE_USER,
-    publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-  };
-
-  // 🔍 Debug (remove after testing)
-  console.log("CONFIG DEBUG:", config);
-
-  return config;
+const isConfigured = () => {
+  const { serviceId, templateAdmin, templateUser, publicKey } = getConfig();
+  return !!(serviceId && templateAdmin && templateUser && publicKey);
 };
-
-const isConfigured = (config) => {
-  return !!(
-    config.serviceId &&
-    config.templateAdmin &&
-    config.templateUser &&
-    config.publicKey
-  );
-};
-
-/* ================= INIT (only once) ================= */
-
-let isInitialized = false;
-
-const initEmailJS = (publicKey) => {
-  if (!isInitialized) {
-    emailjs.init(publicKey);
-    isInitialized = true;
-    console.log("✅ EmailJS initialized");
-  }
-};
-
-/* ================= ADMIN EMAIL ================= */
 
 export const sendAdminNotification = async (formData) => {
-  const config = getConfig();
+  const { serviceId, templateAdmin, publicKey } = getConfig();
 
-  if (!isConfigured(config)) {
-    console.error("❌ EmailJS config missing:", config);
-    throw new Error("EmailJS is not configured. Check your env variables.");
+  if (!isConfigured()) {
+    throw new Error('EmailJS is not configured. Check your .env file.');
   }
 
-  initEmailJS(config.publicKey);
+  emailjs.init(publicKey);
 
   const templateParams = {
-    to_email: "support@fusionthreat.com",
+    to_email: 'support@fusionthreat.com',
     client_name: formData.name,
     client_email: formData.email,
-    client_company: formData.company || "Not specified",
-    client_team_size: formData.size || "Not specified",
+    client_company: formData.company || 'Not specified',
+    client_team_size: formData.size || 'Not specified',
     client_concern: formData.concern,
-    selected_slot: formData.selectedSlot || "Not selected",
+    selected_slot: formData.selectedSlot || 'Not selected',
     submission_date: new Date().toLocaleString(),
   };
 
-  try {
-    const response = await emailjs.send(
-      config.serviceId,
-      config.templateAdmin,
-      templateParams
-    );
+  console.log('Sending consultation templateParams:', templateParams);
+  console.log('Using templateId:', templateAdmin);
 
-    console.log("✅ Admin email sent:", response);
-    return response;
-  } catch (error) {
-    console.error("❌ Admin email failed:", error);
-    throw error;
-  }
+  const response = await emailjs.send(serviceId, templateAdmin, templateParams);
+  console.log('Admin notification sent:', response);
+  return response;
 };
 
-/* ================= USER EMAIL ================= */
-
 export const sendUserConfirmation = async (formData) => {
-  const config = getConfig();
+  const { serviceId, templateUser, publicKey } = getConfig();
 
-  if (!isConfigured(config)) {
-    console.error("❌ EmailJS config missing:", config);
-    throw new Error("EmailJS is not configured.");
+  if (!isConfigured()) {
+    throw new Error('EmailJS is not configured. Check your .env file.');
   }
 
-  initEmailJS(config.publicKey);
+  emailjs.init(publicKey);
 
   const templateParams = {
     to_email: formData.email,
     user_name: formData.name,
     user_email: formData.email,
-    user_company: formData.company || "Not specified",
+    user_company: formData.company || 'Not specified',
     user_concern: formData.concern,
-    selected_slot: formData.selectedSlot || "Not selected",
+    selected_slot: formData.selectedSlot || 'Not selected',
     submission_date: new Date().toLocaleString(),
-    support_email: "support@fusionthreat.com",
+    support_email: 'support@fusionthreat.com',
   };
 
-  try {
-    const response = await emailjs.send(
-      config.serviceId,
-      config.templateUser,
-      templateParams
-    );
-
-    console.log("✅ User email sent:", response);
-    return response;
-  } catch (error) {
-    console.error("❌ User email failed:", error);
-    throw error;
-  }
+  const response = await emailjs.send(serviceId, templateUser, templateParams);
+  console.log('User confirmation sent:', response);
+  return response;
 };
 
-/* ================= MAIN FLOW ================= */
+// ← Ticket form disabled until separate template is created on EmailJS dashboard
+export const sendTicketNotification = async (ticketData) => {
+  console.warn('Ticket notification is currently disabled. Create a separate EmailJS template to enable it.');
+  return { success: false, message: 'Ticket form is not yet configured.' };
+};
 
 export const handleConsultationBooking = async (formData) => {
-  try {
-    // 1️⃣ Send admin email immediately
-    await sendAdminNotification(formData);
+  await sendAdminNotification(formData);
 
-    // 2️⃣ Send user email after delay
-    setTimeout(() => {
-      sendUserConfirmation(formData).catch((err) =>
-        console.error("Delayed user email failed:", err)
-      );
-    }, 60000);
+  setTimeout(() => {
+    sendUserConfirmation(formData).catch((err) =>
+      console.error('Delayed user confirmation failed:', err)
+    );
+  }, 60_000);
 
-    return {
-      success: true,
-      message: "Consultation booked successfully!",
-    };
-  } catch (error) {
-    console.error("❌ Booking error:", error);
-
-    return {
-      success: false,
-      message: "Failed to send email. Please try again.",
-    };
-  }
+  return { success: true, message: 'Consultation booked successfully!' };
 };

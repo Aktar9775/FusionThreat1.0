@@ -1,25 +1,26 @@
 /* ── Reset & Variables ─────────────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
+
 :root {
   --bg: #08090c;
-  --bg2: #0d1013;
-  --bg3: #11151a;
-  --red: #C91D22;
-  --red-dim: #C91D22;
+  --bg2: #0f1418;
+ 
+  --red: #f7161e;
+  --red-dim: #f7161e;
   --red-glow: rgba(255,68,68,0.15);
-  --steel: #a0a8b0;
-  --steel-light: #c8d0d8;
-  --steel-dim: #707880;
-  --green: #C91D22;
-  --green-dim: #C91D22;
+  --steel: #e5eaef;
+  --steel-light: #b4b8bd;
+  --steel-dim: #dee2e7;
+  --green: #ca060c;
+  --green-dim: #ca060c;
   --green-glow: rgba(255,68,68,0.15);
   --yellow: #ffcc00;
   --cyan: #ffb700;
   --blue: #4488ff;
-  --dim: rgba(255,255,255,0.4);
-  --text: rgba(255,255,255,0.87);
-  --text-sec: rgba(255,255,255,0.55);
+  --dim: rgba(255, 255, 255, 0.9);
+  --text: rgba(255, 255, 255, 0.95);
+  --text-sec: rgba(255, 255, 255, 0.77);
   --glass: rgba(255,255,255,0.03);
   --glass-border: rgba(255,68,68,0.12);
   --glass-border-hover: rgba(255,68,68,0.25);
@@ -237,7 +238,7 @@ img { max-width: 100%; }
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, #000 40%, transparent 100%);
 }
-.hero__glow {
+/* .hero__glow {
   position: absolute;
   top: 20%;
   left: 50%;
@@ -246,12 +247,11 @@ img { max-width: 100%; }
   height: 400px;
   background: radial-gradient(ellipse, rgba(255,68,68,0.06) 0%, transparent 70%);
   pointer-events: none;
-}
+} */
 .hero__content {
   position: relative;
   z-index: 1;
   width: 100%;
-  
   margin: 0 auto;
   padding: 120px 24px 120px;
   text-align: center;
@@ -1283,9 +1283,8 @@ select.form__input option { background: #111; }
   /* width: 100%;
   height: 100%; */
   color: #bcc1c6;
-  opacity: 0.1;
   filter: drop-shadow(0 0 18px rgba(255, 60, 0, 0.35));
-  animation: shieldPulse 4s ease-in-out infinite;
+  
 }
 @keyframes shieldPulse {
   0%,100% { opacity: 0.5; filter: drop-shadow(0 0 18px rgba(184, 196, 203, 0.3)); }
@@ -1293,7 +1292,7 @@ select.form__input option { background: #111; }
 }
 .hero__shield-brand {
   position: relative;
-  z-index: 1;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1312,21 +1311,19 @@ select.form__input option { background: #111; }
   font-weight: 500;
   letter-spacing: 0.04em;
   color: #fff;
-  text-shadow: 0 0 20px rgba(205, 213, 217, 0.6);
   white-space: nowrap;
   opacity: 0.60;
 }
 .hero__shield-name strong {
   font-weight: 800;
   color: var(--green);
-  text-shadow: 0 0 14px rgba(255,255,255,0.4);
 }
 .hero__shield-tagline {
   font-family: var(--mono);
   font-size: 17px;
   letter-spacing: 0.2em;
   color:#bcc1c6 ;
-  opacity: 0.60;
+  opacity: 0.70;
 }
 .hero__content { position: relative; z-index: 1; }
 
