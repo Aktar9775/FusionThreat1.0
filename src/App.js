@@ -730,7 +730,7 @@ function Pricing() {
               <div className="price-card__price">{p.price}<span className="price-card__unit">{p.unit}</span></div>
               <div className="price-card__divider" />
               <ul className="price-card__features">
-                {p.features.map((f) => <li key={f}><span className="green">✓</span> {f}</li>)}
+                {p.features.map((f) => <li key={f}><span className="green" style={{color:"green"}}>✓</span> {f}</li>)}
               </ul>
               <a href="mailto:support@fusionthreat.com" className={"btn btn--full " + (p.featured ? "btn--primary" : "btn--ghost")}>Get Started</a>
             </div>
@@ -794,7 +794,7 @@ function Contact() {
             <p className="dim">We'll evaluate your current environment, identify immediate risks, and provide a custom recommendation — completely free, no obligation.</p>
             <ul className="contact__benefits">
               {["Current security posture review", "Industry-specific threat analysis", "Compliance gap identification", "Custom pricing & service recommendation", "30-day pilot program available"].map((b) => (
-                <li key={b}><span className="green">✓</span> {b}</li>
+                <li key={b}><span className="green" style={{color:"green"}}>✓</span> {b}</li>
               ))}
             </ul>
             <div className="contact__direct">
