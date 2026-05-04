@@ -295,7 +295,7 @@ function SOCDashboard() {
   return (
     <section id="socdashboard" className="section soc">
       <div className="container">
-        <ThreatMapCanvas />
+        {/* <ThreatMapCanvas /> */}
         <div className="section__header">
           <h2>Real-Time Security <span style={{ color: "#f7161e" }}>Operations</span> Center</h2>
           <p>Live metrics from our enterprise SOC — updated in real time.</p>
@@ -511,37 +511,37 @@ const SERVICES = [
   {
     num: "01", title: "24/7 Monitoring & Triage",
     desc: "Continuous visibility across endpoints, cloud, and network with real-time SIEM correlation and automated alerting.",
-    tags: ["SIEM analysis", "Multi-source correlation", "Cloud & endpoint coverage"],
+    tags: ["Centralized SIEM log analysis", "Multi-source threat correlation", "Cloud, network, endpoint coverage","Automated + human validation"],
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /><path d="M6 8l3 3 2-2 3 4 2-2" /></svg>,
   },
   {
     num: "02", title: "Incident Response",
     desc: "Speed is critical. Our IR team follows strict SLAs to isolate and neutralize attacks before significant damage occurs.",
-    tags: ["<15 min critical response", "Threat isolation", "Root cause analysis"],
+    tags: ["<15 min critical response", "Threat isolation & containment", "Root cause analysis", "Post-incident reporting"],
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L3 7v5c0 5 4 9.5 9 11 5-1.5 9-6 9-11V7L12 2z" /><path d="M12 8v4M12 16h.01" /></svg>,
   },
   {
     num: "03", title: "Vulnerability Management",
     desc: "Proactive identification of security gaps before attackers exploit them. Monthly assessments included.",
-    tags: ["Monthly scans", "Critical patching <24hr", "Penetration testing"],
+    tags: ["Monthly vulnerability scans", "Critical patching <24hr", "Penetration testing","Remediation guidance"],
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /><path d="M11 8v3l2 2" /></svg>,
   },
   {
     num: "04", title: "Compliance Enablement",
     desc: "Navigate GDPR, HIPAA, SOC 2, and ISO 27001 with automated reporting, dashboards, and audit support.",
-    tags: ["Automated dashboards", "Audit preparation", "Gap analysis"],
+    tags: ["Automated Compliance dashboards", "Audit preparation & support", "Gap analysis & planning","Evidence collection "],
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" /><rect x="9" y="3" width="6" height="4" rx="1" /><path d="M9 12l2 2 4-4" /></svg>,
   },
   {
     num: "05", title: "Threat Hunting",
     desc: "Proactive search for hidden threats using XDR that evade automated detection systems.",
-    tags: ["Hypothesis-driven", "Behavioral analysis", "IOC identification"],
+    tags: ["Hypothesis-driven & hunting", "Behavioral pattern analysis", "IOC identification","Custom detection rule development"],
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L3 7v5c0 5 4 9.5 9 11 5-1.5 9-6 9-11V7L12 2z" /><path d="M9 12l2 2 4-4M12 7v1" /></svg>,
   },
   {
     num: "06", title: "Cloud Security",
     desc: "Protect AWS, Azure, and GCP with dedicated cloud monitoring and posture management.",
-    tags: ["Workload protection", "Identity monitoring", "Misconfiguration detection"],
+    tags: ["Cloud Workload protection", "Identity & Access monitoring", "Misconfiguration detection","Serverless security coverage"],
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" /><path d="M12 14v-4M10 12l2-2 2 2" /></svg>,
   },
 ];
@@ -587,8 +587,8 @@ function Services() {
   {" "} <span style={{ color: "#f7161e" }}>Eliminate</span>
 </h2>
 
-        {/* ✅ Move canvas inside header properly */}
-        <ThreatMapCanvas />
+        
+        {/* <ThreatMapCanvas /> */}
       </div>
 
       {/* ✅ Services Grid */}
@@ -717,7 +717,7 @@ function Pricing() {
   return (
     <section id="pricing" className="section pricing">
       <div className="container">
-        <ThreatMapCanvas />
+        {/* <ThreatMapCanvas /> */}
         <div className="section__header">
           <h2>Transparent Pricing</h2>
           <p>Predictable monthly pricing that scales with your business. No hidden fees.</p>
