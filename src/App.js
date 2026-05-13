@@ -496,7 +496,7 @@ function ThreatMap() {
 
     {/* Iframe */}
     <iframe
-      src="https://threatmap.checkpoint.com/"
+      src="https://threatmap.bitdefender.com/"
       title="Live Cyber Threat Map"
       className="threatmap__iframe"
     />
