@@ -86,11 +86,11 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                <a href={`mailto:support@fusionthreat.com?subject=${p.name} Plan Inquiry`}
+                <a href="/login"
                   className={isPopular ? 'btn-primary' : 'btn-outline'}
                   style={{ width: '100%', justifyContent: 'center', display: 'flex' }}
                 >
-                  Get Started <ArrowRight size={14} />
+                  Login <ArrowRight size={14} />
                 </a>
               </div>
             );

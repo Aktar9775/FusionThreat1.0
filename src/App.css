@@ -956,8 +956,9 @@ select.form__input option { background: #111; }
 /* ── Alert Popup Toast ────────────────────────────────────────────────────── */
 .alert-popup {
   position: fixed;
-  top: 84px;
+  top: 50%;
   right: 20px;
+  transform: translateY(-50%);
   z-index: 9999;
   display: flex;
   align-items: flex-start;
@@ -977,12 +978,12 @@ select.form__input option { background: #111; }
 .alert-popup--info { border-color: rgba(255,68,68,0.25); }
 
 @keyframes toastIn {
-  from { opacity:0; transform: translateX(60px) scale(0.95); }
-  to { opacity:1; transform: translateX(0) scale(1); }
+  from { opacity:0; transform: translateY(-50%) translateX(60px) scale(0.95); }
+  to { opacity:1; transform: translateY(-50%) translateX(0) scale(1); }
 }
 @keyframes toastOut {
-  from { opacity:1; transform: translateX(0); }
-  to { opacity:0; transform: translateX(60px); }
+  from { opacity:1; transform: translateY(-50%) translateX(0); }
+  to { opacity:0; transform: translateY(-50%) translateX(60px); }
 }
 
 /* Mobile/Tablet popup position - bottom */
@@ -992,6 +993,7 @@ select.form__input option { background: #111; }
     bottom: 20px;
     right: 20px;
     left: 20px;
+    transform: none;
     max-width: none;
     animation: toastInBottom 0.35s cubic-bezier(.22,1,.36,1), toastOutBottom 0.3s ease 3.2s forwards;
   }
