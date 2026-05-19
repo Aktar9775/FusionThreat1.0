@@ -29,6 +29,7 @@ function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [showUserTypeMenu, setShowUserTypeMenu] = useState(false);
+  const [showServicesMenu, setShowServicesMenu] = useState(false);
   
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
@@ -45,6 +46,16 @@ function Nav() {
     }
     setShowUserTypeMenu(false);
   };
+
+  // Services data
+  const servicesData = [
+    { title: "24/7 Monitoring & Triage", branches: ["Centralized SIEM log analysis", "Multi-source threat correlation", "Cloud, network, endpoint coverage", "Automated + human validation"] },
+    { title: "Incident Response", branches: ["<15 min critical response", "Threat isolation & containment", "Root cause analysis", "Post-incident reporting"] },
+    { title: "Vulnerability Management", branches: ["Monthly vulnerability scans", "Critical patching <24hr", "Penetration testing", "Remediation guidance"] },
+    { title: "Compliance Enablement", branches: ["Automated Compliance dashboards", "Audit preparation & support", "Gap analysis & planning", "Evidence collection"] },
+    { title: "Threat Hunting", branches: ["Hypothesis-driven & hunting", "Behavioral pattern analysis", "IOC identification", "Custom detection rule development"] },
+    { title: "Cloud Security", branches: ["Cloud Workload protection", "Identity & Access monitoring", "Misconfiguration detection", "Serverless security coverage"] },
+  ];
   
   const links = [
     ["SOC Dashboard", "#socdashboard"],
@@ -65,11 +76,169 @@ function Nav() {
           </span>
         </a>
         <ul className={"nav__links" + (open ? " nav__links--open" : "")}>
-          {links.map(([l, h]) => (
-            <li key={l}>
-              <a href={h} onClick={() => setOpen(false)}>{l}</a>
-            </li>
-          ))}
+          {links.map(([l, h]) => {
+            // Services link with dropdown
+            if (l === "Services") {
+              return (
+                <li key={l} 
+                  onMouseEnter={() => setShowServicesMenu(true)}
+                  onMouseLeave={() => setShowServicesMenu(false)}
+                  style={{ position: 'relative' }}
+                >
+                  <a href={h} onClick={() => setOpen(false)} style={{ position: 'relative', paddingRight: '8px' }}>
+                    {l} ▼
+                  </a>
+                  {/* Services Dropdown */}
+                  {showServicesMenu && (
+                 <div style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: '0',
+                  transform: 'translateX(-50%)',
+                  marginTop: '8px',
+               background: 'rgba(15, 15, 15, 0.92)',
+                  border: '1px solid var(--border)',
+                  borderRadius: '8px',
+                  backdropFilter: 'blur(20px)',
+                  zIndex: 1000,
+                  minWidth: '720px',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.63)',
+                  padding: '20px',
+                }}>
+                  {/* Row 1 — first 3 services */}
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '0',
+                    marginBottom: '0',
+                    borderBottom: '1px solid rgba(255,255,255,0.08)',
+                    paddingBottom: '16px',
+                    marginBottom: '16px',
+                  }}>
+                    {servicesData.slice(0, 3).map((service, idx) => (
+                      <div key={idx} style={{
+                        flex: '1',
+                        minWidth: '0',
+                        borderRight: idx < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                        paddingRight: idx < 2 ? '16px' : '0',
+                        paddingLeft: idx > 0 ? '16px' : '0',
+                      }}>
+                        <div style={{
+                          padding: '0 0 10px 0',
+                          fontWeight: '600',
+                          fontSize: '11px',
+                          color: 'var(--red)',
+                          borderBottom: '1px solid rgba(255,255,255,0.08)',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.05em',
+                          cursor: 'default',
+                          marginBottom: '6px',
+                          whiteSpace: 'nowrap',
+                        }}>
+                          {service.title}
+                        </div>
+                        {service.branches.map((branch, bIdx) => (
+                          <div
+                            key={bIdx}
+                            style={{
+                              padding: '5px 8px',
+                              fontSize: '12px',
+                              color: 'var(--text-sec)',
+                              borderRadius: '4px',
+                              cursor: 'default',
+                              transition: 'all 0.15s ease',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = 'rgba(201,29,34,0.1)';
+                              e.currentTarget.style.color = 'var(--red)';
+                              e.currentTarget.style.paddingLeft = '12px';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = 'none';
+                              e.currentTarget.style.color = 'var(--text-sec)';
+                              e.currentTarget.style.paddingLeft = '8px';
+                            }}
+                          >
+                            • {branch}
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Row 2 — remaining services centered */}
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '0',
+                  }}>
+                    {servicesData.slice(3).map((service, idx, arr) => (
+                      <div key={idx} style={{
+                        flex: '0 0 calc(100% / 3)',
+                        minWidth: '0',
+                        borderRight: idx < arr.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                        paddingRight: idx < arr.length - 1 ? '16px' : '0',
+                        paddingLeft: idx > 0 ? '16px' : '0',
+                      }}>
+                        <div style={{
+                          padding: '0 0 10px 0',
+                          fontWeight: '600',
+                          fontSize: '11px',
+                          color: 'var(--red)',
+                          borderBottom: '1px solid rgba(255,255,255,0.08)',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.05em',
+                          cursor: 'default',
+                          marginBottom: '6px',
+                          whiteSpace: 'nowrap',
+                        }}>
+                          {service.title}
+                        </div>
+                        {service.branches.map((branch, bIdx) => (
+                          <div
+                            key={bIdx}
+                            style={{
+                              padding: '5px 8px',
+                              fontSize: '12px',
+                              color: 'var(--text-sec)',
+                              borderRadius: '4px',
+                              cursor: 'default',
+                              transition: 'all 0.15s ease',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = 'rgba(201,29,34,0.1)';
+                              e.currentTarget.style.color = 'var(--red)';
+                              e.currentTarget.style.paddingLeft = '12px';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = 'none';
+                              e.currentTarget.style.color = 'var(--text-sec)';
+                              e.currentTarget.style.paddingLeft = '8px';
+                            }}
+                          >
+                            • {branch}
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                  )}
+                </li>
+              );
+            }
+            return (
+              <li key={l}>
+                <a href={h} onClick={() => setOpen(false)}>{l}</a>
+              </li>
+            );
+          })}
         </ul>
         <div className="nav__right">
           <div className="nav__actions">
@@ -1100,8 +1269,342 @@ function ScrollToTopButton() {
   ) : null;
 }
 
+/* ── Contact Modal (appears every 2 minutes) ──────────────────────────────────── */
+function ContactModal({ isOpen, onClose }) {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [company, setCompany] = useState('');
+  const [companySize, setCompanySize] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    if (!name || !email || !phone || !company || !companySize || !message) {
+      setError('Please fill in all fields');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Here you would call your email service
+      // await handleConsultationBooking({ name, email, phone, company, companySize, message });
+      
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCompany('');
+      setCompanySize('');
+      setMessage('');
+      onClose();
+    } catch (err) {
+      setError('Failed to send. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      background: 'rgba(0,0,0,0.6)',
+      backdropFilter: 'blur(5px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 10000,
+      animation: 'fadeIn 0.3s ease',
+    }}>
+      <style>{`
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      `}</style>
+      
+      <div style={{
+        background: 'var(--bg)',
+        border: '1px solid var(--border)',
+        borderRadius: '16px',
+        padding: '40px',
+        maxWidth: '470px',
+        width: '90%',
+        boxShadow: '0 20px 60px rgba(201,29,34,0.2)',
+        position: 'relative',
+        animation: 'slideUp 0.4s cubic-bezier(.22,1,.36,1)',
+      }}>
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            background: 'none',
+            border: 'none',
+            color: 'var(--text-sec)',
+            fontSize: '24px',
+            cursor: 'pointer',
+            padding: '0',
+            width: '32px',
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.color = 'var(--red)';
+            e.target.style.transform = 'rotate(90deg)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.color = 'var(--text-sec)';
+            e.target.style.transform = 'rotate(0deg)';
+          }}
+        >
+          ✕
+        </button>
+
+        {/* Modal content */}
+        <div style={{ marginBottom: '24px' }}>
+          <h3 style={{
+            margin: '0 0 8px 0',
+            fontSize: '22px',
+            fontWeight: '700',
+            color: 'var(--text)',
+            fontFamily: 'var(--head)',
+            lineHeight: '1.4',
+          }}>
+            Reach out, We are here for You <br/>
+            <span style={{ color: 'var(--red)' }}>Get Your Security Audit</span>
+          </h3>
+          <p style={{
+            margin: '0',
+            fontSize: '13px',
+            color: 'var(--text-sec)',
+            lineHeight: '1.6',
+          }}>
+            Join enterprise leaders using FusionThreat. Start with a complimentary security assessment.
+          </p>
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '14px',
+          maxHeight: '500px',
+          overflowY: 'auto',
+          paddingRight: '8px',
+        }}>
+          {error && (
+            <div style={{
+              background: 'rgba(201,29,34,0.1)',
+              border: '1px solid rgba(201,29,34,0.3)',
+              color: 'var(--red)',
+              padding: '10px 12px',
+              borderRadius: '6px',
+              fontSize: '12px',
+            }}>
+              {error}
+            </div>
+          )}
+
+          {/* Full Name */}
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              color: 'var(--text)',
+              fontFamily: 'var(--body)',
+              fontSize: '13px',
+              padding: '10px 14px',
+              outline: 'none',
+              transition: 'border-color 0.2s ease',
+            }}
+            onFocus={(e) => e.target.style.borderColor = 'rgba(201,29,34,0.35)'}
+            onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+          />
+
+          {/* Work Email */}
+          <input
+            type="email"
+            placeholder="Work Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              color: 'var(--text)',
+              fontFamily: 'var(--body)',
+              fontSize: '13px',
+              padding: '10px 14px',
+              outline: 'none',
+              transition: 'border-color 0.2s ease',
+            }}
+            onFocus={(e) => e.target.style.borderColor = 'rgba(201,29,34,0.35)'}
+            onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+          />
+
+          {/* Contact Number */}
+          <input
+            type="tel"
+            placeholder="Contact Number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              color: 'var(--text)',
+              fontFamily: 'var(--body)',
+              fontSize: '13px',
+              padding: '10px 14px',
+              outline: 'none',
+              transition: 'border-color 0.2s ease',
+            }}
+            onFocus={(e) => e.target.style.borderColor = 'rgba(201,29,34,0.35)'}
+            onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+          />
+
+          {/* Company Name */}
+          <input
+            type="text"
+            placeholder="Company Name"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              color: 'var(--text)',
+              fontFamily: 'var(--body)',
+              fontSize: '13px',
+              padding: '10px 14px',
+              outline: 'none',
+              transition: 'border-color 0.2s ease',
+            }}
+            onFocus={(e) => e.target.style.borderColor = 'rgba(201,29,34,0.35)'}
+            onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+          />
+
+          {/* Company Size */}
+          <select
+            value={companySize}
+            onChange={(e) => setCompanySize(e.target.value)}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              color: 'red',
+              fontFamily: 'var(--body)',
+              fontSize: '13px',
+              padding: '10px 14px',
+              outline: 'none',
+              transition: 'border-color 0.2s ease',
+              cursor: 'pointer',
+            }}
+            onFocus={(e) => e.target.style.borderColor = 'rgba(201,29,34,0.35)'}
+            onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+          >
+            <option value="">Select Company Size</option>
+            <option value="1-50">1-50 Employees</option>
+            <option value="51-250">51-250 Employees</option>
+            <option value="251-500">251-500 Employees</option>
+            <option value="500+">500+ Employees</option>
+          </select>
+
+          {/* Message */}
+          <textarea
+            placeholder="Message (Tell us about your security concerns)"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            rows={3}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              color: 'var(--text)',
+              fontFamily: 'var(--body)',
+              fontSize: '13px',
+              padding: '10px 14px',
+              outline: 'none',
+              transition: 'border-color 0.2s ease',
+              resize: 'none',
+            }}
+            onFocus={(e) => e.target.style.borderColor = 'rgba(201,29,34,0.35)'}
+            onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+          />
+
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              marginTop: '8px',
+              padding: '11px 16px',
+              borderRadius: '8px',
+              background: 'var(--red)',
+              border: 'none',
+              color: '#fff',
+              fontFamily: 'var(--body)',
+              fontSize: '13px',
+              fontWeight: '700',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              transition: 'opacity 0.2s ease',
+              opacity: loading ? 0.6 : 1,
+            }}
+            onMouseEnter={(e) => !loading && (e.target.style.opacity = '0.85')}
+            onMouseLeave={(e) => !loading && (e.target.style.opacity = '1')}
+          >
+            {loading ? ' Sending...' : 'Send Request'}
+          </button>
+        </form>
+
+        {/* Footer */}
+        <p style={{
+          margin: '16px 0 0 0',
+          textAlign: 'center',
+          fontSize: '11px',
+          color: 'var(--text-sec)',
+        }}>
+          We'll respond within 24 hours. No spam, just insights.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 /* ── App ──────────────────────────────────────────────────────────────────── */
 export default function App() {
+  const [showContactModal, setShowContactModal] = useState(false);
+
+  // Show contact modal every 2 minutes
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setShowContactModal(true);
+    }, 0.7 * 60 * 1000); // 2 minutes
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <>
       <Nav />
@@ -1114,6 +1617,10 @@ export default function App() {
       <Contact />
       <Footer />
       <ScrollToTopButton />
+      <ContactModal 
+        isOpen={showContactModal} 
+        onClose={() => setShowContactModal(false)} 
+      />
     </>
   );
 }
