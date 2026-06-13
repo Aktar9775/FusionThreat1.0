@@ -1352,7 +1352,7 @@ export default function ServiceDetail() {
     >
       <h1
         style={{
-          fontFamily: 'var(--font-display)',
+          fontFamily: 'var(--head)',
           fontSize: 'clamp(32px, 5vw, 56px)',
           fontWeight: 700,
           color: 'var(--green)',
@@ -1402,7 +1402,7 @@ export default function ServiceDetail() {
             color: '#000',
             border: 'none',
             borderRadius: 4,
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontWeight: 600,
             fontSize: 14,
             cursor: 'pointer',
@@ -1419,7 +1419,7 @@ export default function ServiceDetail() {
             color: 'var(--green)',
             border: '1px solid var(--green)',
             borderRadius: 4,
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontWeight: 600,
             fontSize: 14,
             cursor: 'pointer',
@@ -1456,11 +1456,9 @@ export default function ServiceDetail() {
     style={{
       position: 'absolute',
       bottom: 'clamp(80px, 25%, 130px)',
-
       left: '50%',
       transform: 'translateX(-50%)',
       color: '#fff',
-     
     }}
   >
     Fusion<strong>Threat</strong>
@@ -1473,7 +1471,7 @@ export default function ServiceDetail() {
       {/* <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 24,
@@ -1496,7 +1494,7 @@ export default function ServiceDetail() {
       <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)'  }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 24,
@@ -1521,7 +1519,7 @@ export default function ServiceDetail() {
       'linear-gradient(135deg, #0b1015e6 0%, #030710 100%)' ,}}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 24,
@@ -1545,7 +1543,7 @@ export default function ServiceDetail() {
       'linear-gradient(135deg, #0b1015e6 0%, #030710 100%)', }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 24,
@@ -1580,7 +1578,7 @@ export default function ServiceDetail() {
   >
     <h2
       style={{
-        fontFamily: "var(--font-display)",
+        fontFamily: "var(--head)",
         fontSize: "clamp(28px, 4vw, 44px)",
         fontWeight: 700,
         marginBottom: 56,
@@ -1677,7 +1675,7 @@ export default function ServiceDetail() {
       <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)', background: 'linear-gradient(135deg, rgba(255, 60, 0, 0.12) 0%, rgba(0, 7, 5, 0.63) 100%)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 24,
@@ -1705,7 +1703,7 @@ export default function ServiceDetail() {
       <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)'  }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 24,
@@ -1732,7 +1730,7 @@ export default function ServiceDetail() {
       <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)', background: 'linear-gradient(135deg, rgba(255, 60, 0, 0.12) 0%, rgba(0, 7, 5, 0.63) 100%)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 40,
@@ -1766,7 +1764,7 @@ export default function ServiceDetail() {
       <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)',borderRadius: '20% 20% 0 0'  }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 56,
@@ -1792,7 +1790,7 @@ export default function ServiceDetail() {
                     <Icon size={32} color='var(--green)' />
                   </div>
                   <h3 style={{
-                    fontFamily: 'var(--font-display)',
+                    fontFamily: 'var(--head)',
                     fontSize: 18,
                     fontWeight: 600,
                     color: 'var(--green)',
@@ -1814,7 +1812,7 @@ export default function ServiceDetail() {
       <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 56,
@@ -1850,7 +1848,7 @@ export default function ServiceDetail() {
       <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 56,
@@ -1882,7 +1880,7 @@ export default function ServiceDetail() {
                   {p.step}
                 </div>
                 <h3 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: 'var(--head)',
                   fontSize: 18,
                   fontWeight: 600,
                   color: 'var(--green)',
@@ -1925,7 +1923,7 @@ export default function ServiceDetail() {
                 PRICING
               </h3>
               <p style={{
-                fontFamily: 'var(--font-display)',
+                fontFamily: 'var(--head)',
                 fontSize: 'clamp(24px, 3vw, 36px)',
                 fontWeight: 700,
                 color: 'var(--green)',
@@ -2013,7 +2011,7 @@ export default function ServiceDetail() {
   >
     <h2
       style={{
-        fontFamily: 'var(--font-display)',
+        fontFamily: 'var(--head)',
         fontSize: 'clamp(28px, 4vw, 40px)',
         fontWeight: 700,
         marginBottom: 20,
@@ -2051,7 +2049,7 @@ export default function ServiceDetail() {
           color: '#000',
           border: 'none',
           borderRadius: 4,
-          fontFamily: 'var(--font-display)',
+          fontFamily: 'var(--head)',
           fontWeight: 600,
           fontSize: 14,
           cursor: 'pointer',
@@ -2069,7 +2067,7 @@ export default function ServiceDetail() {
           color: 'var(--green)',
           border: '1px solid var(--green)',
           borderRadius: 4,
-          fontFamily: 'var(--font-display)',
+          fontFamily: 'var(--head)',
           fontWeight: 600,
           fontSize: 14,
           cursor: 'pointer',
@@ -2086,7 +2084,7 @@ export default function ServiceDetail() {
       <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)', background: 'rgba(16, 185, 129, 0.03)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 44px)',
             fontWeight: 700,
             marginBottom: 56,
@@ -2136,7 +2134,7 @@ export default function ServiceDetail() {
       <div style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h2 style={{
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--head)',
             fontSize: 'clamp(28px, 4vw, 40px)',
             fontWeight: 700,
             marginBottom: 40,
@@ -2195,7 +2193,7 @@ export default function ServiceDetail() {
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
               <h2 style={{
-                fontFamily: 'var(--font-display)',
+                fontFamily: 'var(--head)',
                 fontSize: 28,
                 fontWeight: 700,
                 color: '#fff',
@@ -2401,7 +2399,7 @@ export default function ServiceDetail() {
                     color: '#000',
                     border: 'none',
                     borderRadius: 4,
-                    fontFamily: 'var(--font-display)',
+                    fontFamily: 'var(--head)',
                     fontWeight: 600,
                     fontSize: 14,
                     cursor: loading ? 'not-allowed' : 'pointer',
