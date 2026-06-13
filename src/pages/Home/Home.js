@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+﻿import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import {
@@ -47,14 +47,14 @@ function Nav() {
     setShowUserTypeMenu(false);
   };
 
-  // Services data
+  // Services data with navigation slugs
   const servicesData = [
-    { title: "24/7 Monitoring & Triage", branches: ["Centralized SIEM log analysis", "Multi-source threat correlation", "Cloud, network, endpoint coverage", "Automated + human validation"] },
-    { title: "Incident Response", branches: ["<15 min critical response", "Threat isolation & containment", "Root cause analysis", "Post-incident reporting"] },
-    { title: "Vulnerability Management", branches: ["Monthly vulnerability scans", "Critical patching <24hr", "Penetration testing", "Remediation guidance"] },
-    { title: "Compliance Enablement", branches: ["Automated Compliance dashboards", "Audit preparation & support", "Gap analysis & planning", "Evidence collection"] },
-    { title: "Threat Hunting", branches: ["Hypothesis-driven & hunting", "Behavioral pattern analysis", "IOC identification", "Custom detection rule development"] },
-    { title: "Cloud Security", branches: ["Cloud Workload protection", "Identity & Access monitoring", "Misconfiguration detection", "Serverless security coverage"] },
+    { title: "24/7 Monitoring & Triage", slug: "monitoring-triage", branches: ["Centralized SIEM log analysis", "Multi-source threat correlation", "Cloud, network, endpoint coverage", "Automated + human validation"] },
+    { title: "Incident Response", slug: "incident-response", branches: ["<15 min critical response", "Threat isolation & containment", "Root cause analysis", "Post-incident reporting"] },
+    { title: "Vulnerability Management", slug: "vulnerability-management", branches: ["Monthly vulnerability scans", "Critical patching <24hr", "Penetration testing", "Remediation guidance"] },
+    { title: "Compliance Enablement", slug: "compliance-enablement", branches: ["Automated Compliance dashboards", "Audit preparation & support", "Gap analysis & planning", "Evidence collection"] },
+    { title: "Threat Hunting", slug: "threat-hunting", branches: ["Hypothesis-driven & hunting", "Behavioral pattern analysis", "IOC identification", "Custom detection rule development"] },
+    { title: "Cloud Security", slug: "cloud-security", branches: ["Cloud Workload protection", "Identity & Access monitoring", "Misconfiguration detection", "Serverless security coverage"] },
   ];
   
   const links = [
@@ -123,33 +123,60 @@ function Nav() {
                         paddingRight: idx < 2 ? '16px' : '0',
                         paddingLeft: idx > 0 ? '16px' : '0',
                       }}>
-                        <div style={{
-                          padding: '0 0 10px 0',
-                          fontWeight: '600',
-                          fontSize: '11px',
-                          color: 'var(--red)',
-                          borderBottom: '1px solid rgba(255,255,255,0.08)',
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.05em',
-                          cursor: 'default',
-                          marginBottom: '6px',
-                          whiteSpace: 'nowrap',
-                        }}>
+                        <button
+                          onClick={() => {
+                            navigate(`/service/${service.slug}`);
+                            setShowServicesMenu(false);
+                            setOpen(false);
+                          }}
+                          style={{
+                            padding: '0 0 10px 0',
+                            fontWeight: '600',
+                            fontSize: '11px',
+                            color: 'var(--red)',
+                            borderBottom: '1px solid rgba(255,255,255,0.08)',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.05em',
+                            cursor: 'pointer',
+                            marginBottom: '6px',
+                            whiteSpace: 'nowrap',
+                            background: 'none',
+                            border: 'none',
+                            width: '100%',
+                            textAlign: 'left',
+                            transition: 'all 0.2s ease',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--green)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--red)';
+                          }}
+                        >
                           {service.title}
-                        </div>
+                        </button>
                         {service.branches.map((branch, bIdx) => (
-                          <div
+                          <button
                             key={bIdx}
+                            onClick={() => {
+                              navigate(`/service/${service.slug}`);
+                              setShowServicesMenu(false);
+                              setOpen(false);
+                            }}
                             style={{
                               padding: '5px 8px',
                               fontSize: '12px',
                               color: 'var(--text-sec)',
                               borderRadius: '4px',
-                              cursor: 'default',
+                              cursor: 'pointer',
                               transition: 'all 0.15s ease',
                               whiteSpace: 'nowrap',
                               overflow: 'hidden',
                               textOverflow: 'ellipsis',
+                              background: 'none',
+                              border: 'none',
+                              width: '100%',
+                              textAlign: 'left',
                             }}
                             onMouseEnter={(e) => {
                               e.currentTarget.style.background = 'rgba(201,29,34,0.1)';
@@ -163,7 +190,7 @@ function Nav() {
                             }}
                           >
                             • {branch}
-                          </div>
+                          </button>
                         ))}
                       </div>
                     ))}
@@ -183,33 +210,60 @@ function Nav() {
                         paddingRight: idx < arr.length - 1 ? '16px' : '0',
                         paddingLeft: idx > 0 ? '16px' : '0',
                       }}>
-                        <div style={{
-                          padding: '0 0 10px 0',
-                          fontWeight: '600',
-                          fontSize: '11px',
-                          color: 'var(--red)',
-                          borderBottom: '1px solid rgba(255,255,255,0.08)',
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.05em',
-                          cursor: 'default',
-                          marginBottom: '6px',
-                          whiteSpace: 'nowrap',
-                        }}>
+                        <button
+                          onClick={() => {
+                            navigate(`/service/${service.slug}`);
+                            setShowServicesMenu(false);
+                            setOpen(false);
+                          }}
+                          style={{
+                            padding: '0 0 10px 0',
+                            fontWeight: '600',
+                            fontSize: '11px',
+                            color: 'var(--red)',
+                            borderBottom: '1px solid rgba(255,255,255,0.08)',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.05em',
+                            cursor: 'pointer',
+                            marginBottom: '6px',
+                            whiteSpace: 'nowrap',
+                            background: 'none',
+                            border: 'none',
+                            width: '100%',
+                            textAlign: 'left',
+                            transition: 'all 0.2s ease',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--green)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--red)';
+                          }}
+                        >
                           {service.title}
-                        </div>
+                        </button>
                         {service.branches.map((branch, bIdx) => (
-                          <div
+                          <button
                             key={bIdx}
+                            onClick={() => {
+                              navigate(`/service/${service.slug}`);
+                              setShowServicesMenu(false);
+                              setOpen(false);
+                            }}
                             style={{
                               padding: '5px 8px',
                               fontSize: '12px',
                               color: 'var(--text-sec)',
                               borderRadius: '4px',
-                              cursor: 'default',
+                              cursor: 'pointer',
                               transition: 'all 0.15s ease',
                               whiteSpace: 'nowrap',
                               overflow: 'hidden',
                               textOverflow: 'ellipsis',
+                              background: 'none',
+                              border: 'none',
+                              width: '100%',
+                              textAlign: 'left',
                             }}
                             onMouseEnter={(e) => {
                               e.currentTarget.style.background = 'rgba(201,29,34,0.1)';
@@ -223,7 +277,7 @@ function Nav() {
                             }}
                           >
                             • {branch}
-                          </div>
+                          </button>
                         ))}
                       </div>
                     ))}

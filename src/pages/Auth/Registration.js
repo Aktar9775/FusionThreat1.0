@@ -202,7 +202,8 @@ export default function Registration() {
           margin: '0 auto 24px',
           animation: 'fadeUp 0.7s 0.15s cubic-bezier(.22,1,.36,1) both',
         }}>
-          Enterprise security in minutes. Start your 30-day free trial now.
+          Enterprise security in minutes. Start your 30-day free trial now. <br />
+          Sign in with 
         </p>
 
         {error && (

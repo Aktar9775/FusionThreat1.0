@@ -7,6 +7,7 @@ import Login from './pages/Auth/Login';
 import AdminLogin from './pages/Auth/AdminLogin';
 import Registration from './pages/Auth/Registration';
 import Dashboard from './pages/User/Dashboard';
+import ServiceDetail from './pages/Services/ServiceDetail';
 import './App.css';
 
 /**
@@ -30,6 +31,7 @@ export default function App() {
         <Routes>
           {/* PUBLIC ROUTES */}
           <Route path="/" element={<Home />} />
+          <Route path="/service/:slug" element={<ServiceDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/register" element={<Registration />} />

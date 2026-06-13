@@ -945,14 +945,6 @@ select.form__input option { background: #111; }
   .scroll-to-top svg { width: 20px; height: 20px; }
 }
 
-
-
-
-
-
-
-
-
 /* ── Alert Popup Toast ────────────────────────────────────────────────────── */
 .alert-popup {
   position: fixed;

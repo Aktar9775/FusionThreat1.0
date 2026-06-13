@@ -267,7 +267,7 @@ export default function AdminLogin() {
                   color: 'var(--text)',
                   fontFamily: 'var(--head)',
                 }}>
-                  FusionThreat Admin Login
+                  Fusion<strong style={{ color: 'var(--red)' }}>Threat</strong> Admin Login
                 </h3>
                 
                
