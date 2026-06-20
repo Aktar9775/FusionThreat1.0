@@ -1467,28 +1467,7 @@ export default function ServiceDetail() {
   </div>
 </div>
 
-      {/* What is this service */}
-      {/* <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <h2 style={{
-            fontFamily: 'var(--head)',
-            fontSize: 'clamp(28px, 4vw, 44px)',
-            fontWeight: 700,
-            marginBottom: 24,
-            color: 'var(--green)',
-          }}>
-          {service.title}?
-          </h2>
-          <p style={{
-            fontSize: 16,
-            color: 'var(--text)',
-            lineHeight: 1.8,
-            maxWidth: 900,
-          }}>
-            {service.what}
-          </p>
-        </div>
-      </div> */}
+     
 
       {/* Why Important */}
       <div style={{ padding: '80px 24px', borderBottom: '1px solid var(--border)'  }}>
@@ -1612,13 +1591,13 @@ export default function ServiceDetail() {
               gap: 10,
               alignItems: "flex-start",
               
-            paddingLeft: '70px',
+            paddingLeft: '50px',
             }}
           >
             <div
               style={{
-                width: 36,
-                height: 36,
+                width: 30,
+                height: 30,
                 background:
                   " green",
                 borderRadius: "50%",
@@ -1659,11 +1638,11 @@ export default function ServiceDetail() {
         }}
       >
         <img
-          src="https://microworldinfosol.com/assets/img/global2.png"
+          src="https://www.apcela.com/wp-content/uploads/2021/07/redmap-1024x574.png"
           alt="FusionThreat Security"
           style={{
             width: "100%", 
-            height: "80vh", 
+            height: "60vh", 
           }}
         />
       </div>

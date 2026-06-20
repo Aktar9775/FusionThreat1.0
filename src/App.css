@@ -782,8 +782,13 @@ select.form__input option { background: #111; }
   .footer__col a { font-size: 12px; }
   
   /* Buttons */
-  .btn { font-size: 13px; padding: 9px 18px; }
+  .btn { font-size: 11px; padding: 9px 18px; }
   .btn--lg { padding: 12px 24px; font-size: 13px; }
+  .nav_protected{
+  
+  font-size: 11px;
+  
+    }
 }
 
 /* MOBILE: 600px and below */
@@ -799,7 +804,7 @@ select.form__input option { background: #111; }
   .nav__logo { font-size: 15px; gap: 6px; }
   .nav__logo img { width: 32px !important; height: 32px !important; }
   .nav__actions { gap: 8px; }
- .btn--sm { padding: 6px 12px; font-size: 10px; letter-spacing: 0.04em; }
+   .btn--sm { padding: 6px 9px; font-size: 8px; letter-spacing: 0.04em; }
   
   /* Hero */
   .hero__content { padding: 60px 14px 40px; }

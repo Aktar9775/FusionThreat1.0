@@ -3,52 +3,77 @@ import { Shield } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: '1px solid var(--border)', background: 'var(--bg)', padding: '48px 24px 24px' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 40, marginBottom: 40 }}>
-          {/* Brand */}
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-              <Shield size={18} color="var(--green)" />
-              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 16, letterSpacing: '0.15em', color: '#fff' }}>
-                FUSION<span style={{ color: 'var(--green)' }}>THREAT</span>
+    <footer className="footer">
+      <div className="container">
+        <div className="footer__grid">
+          <div className="footer__brand">
+            <div style={{ display: "flex", alignItems: "center", gap: "0px", marginBottom: "12px" }}>
+              <img src="/loc.png" alt="FusionThreat Logo" style={{ width: "60px", height: "60px", objectFit: "contain" }} />
+              <span style={{ fontFamily: "var(--head)", fontSize: "18px", fontWeight: "600", letterSpacing: "0.02em" }}>
+                Fusion<strong style={{ color: "var(--red)" }}>Threat</strong>
               </span>
             </div>
-            <p style={{ fontSize: 13, color: 'var(--text-dim)', lineHeight: 1.7, marginBottom: 16, maxWidth: 240 }}>
-              Enterprise-grade Managed Security Service Provider. SOC protection 24/7/365.
-            </p>
-            <div style={{ display: 'flex', gap: 8 }}>
-              {['CISSP Certified', 'MITRE ATT&CK', 'NIST CSF'].map(b => (
-                <span key={b} className="tag tag-green">{b}</span>
-              ))}
+            <p className="dim footer__tagline">Enterprise-grade Managed Security Service Provider. SOC protection 24/7/365.</p>
+            <a href="mailto:support@fusionthreat.com" className="contact__link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2v-10" />
+                <path d="M3 7l9 6l9-6" />
+              </svg>{" "}support@fusionthreat.com
+            </a>
+            <div className="footer__certs">
+              <span className="tag tag--dim">CISSP Certified</span>
+              <span className="tag tag--dim">MITRE ATT&CK</span>
+              <span className="tag tag--dim">NIST CSF</span>
             </div>
           </div>
-
-          {/* Links */}
-          {[
-            { heading: 'Services', links: ['24/7 Monitoring', 'Incident Response', 'Vulnerability Mgmt', 'Compliance', 'Threat Hunting'] },
-            { heading: 'Platform', links: ['SOC Dashboard', 'Threat Map', 'Ticketing', 'Pricing', 'Client Portal'] },
-            { heading: 'Contact', links: ['support@fusionthreat.com', 'www.fusionthreat.com', 'Book Assessment', 'Submit Ticket'] },
-          ].map(col => (
-            <div key={col.heading}>
-              <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', marginBottom: 16 }}>{col.heading}</div>
-              {col.links.map(l => (
-                <a key={l} href="#" style={{ display: 'block', fontSize: 13, color: 'var(--text-dim)', marginBottom: 8, transition: 'color 0.2s' }}
-                  onMouseEnter={e => e.target.style.color = 'var(--green)'}
-                  onMouseLeave={e => e.target.style.color = 'var(--text-dim)'}
-                >{l}</a>
-              ))}
-            </div>
-          ))}
+         {[
+  {
+    title: "Services",
+    links: [
+      { label: "24/7 Monitoring",     href: "#services" },
+      { label: "Incident Response",   href: "#services" },
+      { label: "Vulnerability Mgmt",  href: "#services" },
+      { label: "Compliance",          href: "#services" },
+      { label: "Threat Hunting",      href: "#services" },
+    ]
+  },
+  {
+    title: "Platform",
+    links: [
+      { label: "SOC Dashboard",  href: "#socdashboard" },
+      { label: "Threat Map",     href: "#threatmap" },
+      { label: "Ticketing",      href: "#ticketing" },
+      { label: "Pricing",        href: "#pricing" },
+      { label: "Client Portal",  href: "ClientPage.html" },
+    ]
+  },
+  {
+    title: "Contact",
+    links: [
+      { label: "support@fusionthreat.com", href: "mailto:support@fusionthreat.com" },
+      { label: "www.fusionthreat.com",     href: "https://www.fusionthreat.com" },
+      { label: "Book Assessment",          href: "#contact" },
+      { label: "Submit Ticket",            href: "#ticketing" },
+      { label: "Client Login",             href: "ClientPage.html" },
+    ]
+  },
+].map((col) => (
+  <div key={col.title} className="footer__col">
+    <h4 className="footer__col-title">{col.title}</h4>
+    <ul>
+      {col.links.map((l) => (
+        <li key={l.label}>
+          <a href={l.href} className="dim">{l.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+))}
         </div>
-
-        <div style={{ borderTop: '1px solid var(--border)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>
-            © 2026 FUSIONTHREAT. ALL RIGHTS RESERVED.
-          </span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>
-            PROTECTING YOUR BUSINESS. SECURING YOUR FUTURE.
-          </span>
+        <div className="footer__bottom">
+          <span className="dim">© 2026 FUSIONTHREAT. ALL RIGHTS RESERVED.</span>
+          <span className="dim">PROTECTING YOUR BUSINESS. SECURING YOUR FUTURE.</span>
         </div>
       </div>
     </footer>

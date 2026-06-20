@@ -1,10 +1,14 @@
 ﻿import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
+
 import {
   handleConsultationBooking,
   sendTicketNotification,
 } from "../../services/emailService";
+import Services from "../../components/Services";
+import Pricing from "../../components/Pricing";
+// import ThreatMap from "../../components/ThreatMap";
 
 /* ── CountUp hook ─────────────────────────────────────────────────────────── */
 function useCountUp(target, duration, started) {
@@ -30,7 +34,31 @@ function Nav() {
   const [open, setOpen] = useState(false);
   const [showUserTypeMenu, setShowUserTypeMenu] = useState(false);
   const [showServicesMenu, setShowServicesMenu] = useState(false);
-  
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+
+  window.addEventListener('resize', handleResize);
+
+  return () =>
+    window.removeEventListener('resize', handleResize);
+}, []);
+
+useEffect(() => {
+  if (showServicesMenu && isMobile) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+
+  return () => {
+    document.body.style.overflow = '';
+  };
+}, [showServicesMenu, isMobile]);
+
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", fn);
@@ -81,35 +109,55 @@ function Nav() {
             if (l === "Services") {
               return (
                 <li key={l} 
-                  onMouseEnter={() => setShowServicesMenu(true)}
-                  onMouseLeave={() => setShowServicesMenu(false)}
+                  onMouseEnter={() => !isMobile && setShowServicesMenu(true)}
+                  onMouseLeave={() => !isMobile && setShowServicesMenu(false)}
                   style={{ position: 'relative' }}
                 >
-                  <a href={h} onClick={() => setOpen(false)} style={{ position: 'relative', paddingRight: '8px' }}>
+                  <a href={h}  onClick={(e) => {
+      if (isMobile) {
+        e.preventDefault();
+        setShowServicesMenu(!showServicesMenu);
+      }
+    }}>
                     {l} ▼
                   </a>
                   {/* Services Dropdown */}
                   {showServicesMenu && (
                  <div style={{
-                  position: 'absolute',
-                  top: '100%',
-                  left: '0',
-                  transform: 'translateX(-50%)',
-                  marginTop: '8px',
-               background: 'rgba(15, 15, 15, 0.92)',
-                  border: '1px solid var(--border)',
-                  borderRadius: '8px',
-                  backdropFilter: 'blur(20px)',
-                  zIndex: 1000,
-                  minWidth: '720px',
-                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.63)',
-                  padding: '20px',
+                    position: 'absolute',
+    top: '100%',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    marginTop: '8px',
+
+    background: 'rgba(15, 15, 15, 0.92)',
+    border: '1px solid var(--border)',
+    borderRadius: '8px',
+    backdropFilter: 'blur(20px)',
+
+    width: window.innerWidth <= 768 ? '95vw' : '720px',
+    maxWidth: '95vw',
+
+    // Mobile Scroll
+    maxHeight: window.innerWidth <= 768 ? '70vh' : 'auto',
+    overflowY: window.innerWidth <= 768 ? 'auto' : 'visible',
+    overflowX: 'hidden',
+    WebkitOverflowScrolling: 'touch',
+
+    zIndex: 1000,
+    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.63)',
+    padding: '20px',
                 }}>
                   {/* Row 1 — first 3 services */}
                   <div style={{
-                    display: 'flex',
+                   display: 'grid',
+                    gridTemplateColumns:
+                      window.innerWidth <= 768
+                        ? '1fr'
+                        : 'repeat(3, 1fr)',
+                    gap: '16px',
                     justifyContent: 'center',
-                    gap: '0',
+                    
                     marginBottom: '0',
                     borderBottom: '1px solid rgba(255,255,255,0.08)',
                     paddingBottom: '16px',
@@ -198,9 +246,14 @@ function Nav() {
 
                   {/* Row 2 — remaining services centered */}
                   <div style={{
-                    display: 'flex',
+                    display: 'grid',
+                    gridTemplateColumns:
+                      window.innerWidth <= 768
+                        ? '1fr'
+                        : 'repeat(3, 1fr)',
+                    gap: '16px',
                     justifyContent: 'center',
-                    gap: '0',
+                  
                   }}>
                     {servicesData.slice(3).map((service, idx, arr) => (
                       <div key={idx} style={{
@@ -318,7 +371,7 @@ function Nav() {
                 onMouseEnter={(e) => e.target.style.opacity = '0.9'}
                 onMouseLeave={(e) => e.target.style.opacity = '1'}
               >
-                Login / Sign Up ▼
+                Login ▼
               </button>
               
               {/* Dropdown Menu */}
@@ -401,6 +454,7 @@ function Nav() {
   );
 }
 
+
 /* ── Hero ─────────────────────────────────────────────────────────────────── */
 function HeroStat({ val, suffix, label, prefix }) {
   const [vis, setVis] = useState(false);
@@ -434,7 +488,7 @@ function Hero() {
     <section id="hero" className="hero">
       <ThreatMapCanvas />
       <div className="hero__grid-bg" />
-      <div className="hero__glow" />
+      {/* <div className="hero__glow" /> */}
       <div className="hero__shield-wrap">
         <div className="hero__shield-glow" />
         <img src="/loc.png" alt="FusionThreat Shield" className="hero__shield-svg" style={{  marginTop:"15%", objectFit: "contain" }} />
@@ -484,7 +538,7 @@ function Hero() {
         </div>
         <div className="hero__stats">{stats.map((s) => <HeroStat key={s.label} {...s} />)}</div>
       </div>
-      <div className="hero__scan-line" />
+      
     </section>
   );
 }
@@ -865,111 +919,112 @@ function ThreatMap() {
 }
 
 /* ── Services ─────────────────────────────────────────────────────────────── */
-const SERVICES = [
-  {
-    num: "01", title: "24/7 Monitoring & Triage",
-    desc: "Continuous visibility across endpoints, cloud, and network with real-time SIEM correlation and automated alerting.",
-    tags: ["Centralized SIEM log analysis", "Multi-source threat correlation", "Cloud, network, endpoint coverage","Automated + human validation"],
-    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /><path d="M6 8l3 3 2-2 3 4 2-2" /></svg>,
-  },
-  {
-    num: "02", title: "Incident Response",
-    desc: "Speed is critical. Our IR team follows strict SLAs to isolate and neutralize attacks before significant damage occurs.",
-    tags: ["<15 min critical response", "Threat isolation & containment", "Root cause analysis", "Post-incident reporting"],
-    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L3 7v5c0 5 4 9.5 9 11 5-1.5 9-6 9-11V7L12 2z" /><path d="M12 8v4M12 16h.01" /></svg>,
-  },
-  {
-    num: "03", title: "Vulnerability Management",
-    desc: "Proactive identification of security gaps before attackers exploit them. Monthly assessments included.",
-    tags: ["Monthly vulnerability scans", "Critical patching <24hr", "Penetration testing","Remediation guidance"],
-    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /><path d="M11 8v3l2 2" /></svg>,
-  },
-  {
-    num: "04", title: "Compliance Enablement",
-    desc: "Navigate GDPR, HIPAA, SOC 2, and ISO 27001 with automated reporting, dashboards, and audit support.",
-    tags: ["Automated Compliance dashboards", "Audit preparation & support", "Gap analysis & planning","Evidence collection "],
-    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" /><rect x="9" y="3" width="6" height="4" rx="1" /><path d="M9 12l2 2 4-4" /></svg>,
-  },
-  {
-    num: "05", title: "Threat Hunting",
-    desc: "Proactive search for hidden threats using XDR that evade automated detection systems.",
-    tags: ["Hypothesis-driven & hunting", "Behavioral pattern analysis", "IOC identification","Custom detection rule development"],
-    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L3 7v5c0 5 4 9.5 9 11 5-1.5 9-6 9-11V7L12 2z" /><path d="M9 12l2 2 4-4M12 7v1" /></svg>,
-  },
-  {
-    num: "06", title: "Cloud Security",
-    desc: "Protect AWS, Azure, and GCP with dedicated cloud monitoring and posture management.",
-    tags: ["Cloud Workload protection", "Identity & Access monitoring", "Misconfiguration detection","Serverless security coverage"],
-    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" /><path d="M12 14v-4M10 12l2-2 2 2" /></svg>,
-  },
-];
+// const SERVICES = [
+//   {
+//     num: "01", title: "24/7 Monitoring & Triage",
+//     desc: "Continuous visibility across endpoints, cloud, and network with real-time SIEM correlation and automated alerting.",
+//     tags: ["Centralized SIEM log analysis", "Multi-source threat correlation", "Cloud, network, endpoint coverage","Automated + human validation"],
+//     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /><path d="M6 8l3 3 2-2 3 4 2-2" /></svg>,
+//   },
+//   {
+//     num: "02", title: "Incident Response",
+//     desc: "Speed is critical. Our IR team follows strict SLAs to isolate and neutralize attacks before significant damage occurs.",
+//     tags: ["<15 min critical response", "Threat isolation & containment", "Root cause analysis", "Post-incident reporting"],
+//     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L3 7v5c0 5 4 9.5 9 11 5-1.5 9-6 9-11V7L12 2z" /><path d="M12 8v4M12 16h.01" /></svg>,
+//   },
+//   {
+//     num: "03", title: "Vulnerability Management",
+//     desc: "Proactive identification of security gaps before attackers exploit them. Monthly assessments included.",
+//     tags: ["Monthly vulnerability scans", "Critical patching <24hr", "Penetration testing","Remediation guidance"],
+//     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /><path d="M11 8v3l2 2" /></svg>,
+//   },
+//   {
+//     num: "04", title: "Compliance Enablement",
+//     desc: "Navigate GDPR, HIPAA, SOC 2, and ISO 27001 with automated reporting, dashboards, and audit support.",
+//     tags: ["Automated Compliance dashboards", "Audit preparation & support", "Gap analysis & planning","Evidence collection "],
+//     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" /><rect x="9" y="3" width="6" height="4" rx="1" /><path d="M9 12l2 2 4-4" /></svg>,
+//   },
+//   {
+//     num: "05", title: "Threat Hunting",
+//     desc: "Proactive search for hidden threats using XDR that evade automated detection systems.",
+//     tags: ["Hypothesis-driven & hunting", "Behavioral pattern analysis", "IOC identification","Custom detection rule development"],
+//     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L3 7v5c0 5 4 9.5 9 11 5-1.5 9-6 9-11V7L12 2z" /><path d="M9 12l2 2 4-4M12 7v1" /></svg>,
+//   },
+//   {
+//     num: "06", title: "Cloud Security",
+//     desc: "Protect AWS, Azure, and GCP with dedicated cloud monitoring and posture management.",
+//     tags: ["Cloud Workload protection", "Identity & Access monitoring", "Misconfiguration detection","Serverless security coverage"],
+//     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" /><path d="M12 14v-4M10 12l2-2 2 2" /></svg>,
+//   },
+// ];
 
-function Services() {
-  return (
-  <section id="services" className="section services">
-    <div className="container">
+// function Services() {
+//   return (
+//   <section id="services" className="section services">
+//     <div className="container">
 
-      {/* ✅ Wrap heading for better control */}
-      <div className="section__header">
-        <h2 className="services__heading">
-  Detect{" "}
-  <span className="icon">
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
-    </svg>
-  </span>
-  {" "}Respond{" "}
-  <span className="icon">
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
-    </svg>
-  </span>
-  {" "} <span style={{ color: "#f7161e" }}>Eliminate</span>
-</h2>
+//       {/* ✅ Wrap heading for better control */}
+//       <div className="section__header">
+//         <h2 className="services__heading">
+//   Detect{" "}
+//   <span className="icon">
+//     <svg
+//       width="22"
+//       height="22"
+//       viewBox="0 0 24 24"
+//       fill="none"
+//       stroke="currentColor"
+//       strokeWidth="2"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     >
+//       <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
+//     </svg>
+//   </span>
+//   {" "}Respond{" "}
+//   <span className="icon">
+//     <svg
+//       width="22"
+//       height="22"
+//       viewBox="0 0 24 24"
+//       fill="none"
+//       stroke="currentColor"
+//       strokeWidth="2"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     >
+//       <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
+//     </svg>
+//   </span>
+//   {" "} <span style={{ color: "#f7161e" }}>Eliminate</span>
+// </h2>
 
         
-        {/* <ThreatMapCanvas /> */}
-      </div>
+//         {/* <ThreatMapCanvas /> */}
+//       </div>
 
-      {/* ✅ Services Grid */}
-      <div className="services__grid">
-        {SERVICES.map((s) => (
-          <div key={s.num} className="service-card glass-card">
-            <div className="service-card__svg-icon">{s.icon}</div>
-            <h3 className="service-card__title">{s.title}</h3>
-            <p className="service-card__desc">{s.desc}</p>
+//       {/* ✅ Services Grid */}
+//       <div className="services__grid">
+//         {SERVICES.map((s) => (
+//           <div key={s.num} className="service-card glass-card">
+//             <div className="service-card__svg-icon">{s.icon}</div>
+//             <h3 className="service-card__title">{s.title}</h3>
+//             <p className="service-card__desc">{s.desc}</p>
 
-            <div className="service-card__tags">
-              {s.tags.map((t) => (
-                <span key={t} className="tag tag--dim">{t}</span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+//             <div className="service-card__tags">
+//               {s.tags.map((t) => (
+//                 <span key={t} className="tag tag--dim">{t}</span>
+//               ))}
+//             </div>
+//           </div>
+//         ))}
+//       </div>
 
-    </div>
-  </section>
-);
-}
+//     </div>
+//   </section>
+// );
+// }
+
 
 /* ── Ticketing ────────────────────────────────────────────────────────────── */
 const TICKETS = [
@@ -1064,47 +1119,8 @@ function Ticketing() {
   );
 }
 
-/* ── Pricing ──────────────────────────────────────────────────────────────── */
-const PLANS = [
-  { name: "Foundation", price: "$10–$20", unit: "/device/mo", featured: false, features: ["Business hours support", "24/7 critical alerts", "Basic SIEM monitoring", "Monthly reports", "Email support"] },
-  { name: "Standard", price: "$50–$150", unit: "/user/mo", featured: true, badge: "Most Popular", features: ["24/7/365 SOC coverage", "Full incident response", "Threat intelligence", "Compliance dashboards", "Client portal access", "Quarterly reviews"] },
-  { name: "Advanced MDR", price: "$200+", unit: "/user/mo", featured: false, features: ["Everything in Standard", "Active threat hunting", "Malware reverse engineering", "Full compliance suite", "Direct engineer access", "Custom SIEM rules"] },
-];
 
-function Pricing() {
-  return (
-    <section id="pricing" className="section pricing">
-      <div className="container">
-        {/* <ThreatMapCanvas /> */}
-        <div className="section__header">
-          <h2>Transparent Pricing</h2>
-          <p>Predictable monthly pricing that scales with your business. No hidden fees.</p>
-        </div>
-        <div className="pricing__grid">
-          {PLANS.map((p) => (
-            <div key={p.name} className={"price-card glass-card" + (p.featured ? " price-card--featured" : "")}>
-              {p.badge && <div className="price-card__badge">{p.badge}</div>}
-              <h3 className="price-card__name">{p.name}</h3>
-              <div className="price-card__price">{p.price}<span className="price-card__unit">{p.unit}</span></div>
-              <div className="price-card__divider" />
-              <ul className="price-card__features">
-                {p.features.map((f) => <li key={f}><span className="green" style={{color:"green"}}>✓</span> {f}</li>)}
-              </ul>
-              <a href="/login" className={"btn btn--full " + (p.featured ? "btn--primary" : "btn--ghost")}>Get Started</a>
-            </div>
-          ))}
-        </div>
-        <div className="pricing__note glass-card">
-          <div className="pricing__note-item"><strong className="green">$1,750–$3,750/mo</strong><span className="dim">Small Business (1–50 Users)</span></div>
-          <div className="pricing__note-divider" />
-          <div className="pricing__note-item"><strong className="green">$10,000–$20,000/mo</strong><span className="dim">Mid-Market (51–250 Users)</span></div>
-          <div className="pricing__note-divider" />
-          <p className="dim" style={{ fontSize: "13px", margin: 0 }}>One-time setup fee = 1 month service. Annual agreements available. Net 30 payment terms.</p>
-        </div>
-      </div>
-    </section>
-  );
-}
+
 
 /* ── Contact ──────────────────────────────────────────────────────────────── */
 const SLOTS = ["Mon 9am", "Mon 11am", "Mon 2pm", "Tue 10am", "Tue 1pm", "Tue 3pm", "Wed 9am", "Wed 11am", "Wed 2pm"];
@@ -1392,6 +1408,7 @@ function ContactModal({ isOpen, onClose }) {
         background: 'var(--bg)',
         border: '1px solid var(--border)',
         borderRadius: '16px',
+        padding: window.innerWidth <= 768 ? '24px 18px' : '40px',
         padding: '40px',
         maxWidth: '470px',
         width: '90%',
@@ -1434,12 +1451,12 @@ function ContactModal({ isOpen, onClose }) {
         {/* Modal content */}
         <div style={{ marginBottom: '24px' }}>
           <h3 style={{
-            margin: '0 0 8px 0',
-            fontSize: '22px',
+             margin: '0 0 8px 0',
+            fontSize: window.innerWidth <= 768 ? '18px' : '22px',
             fontWeight: '700',
             color: 'var(--text)',
-            fontFamily: 'var(--head)',
             lineHeight: '1.4',
+            fontFamily: 'var(--head)',
           }}>
             Reach out, We are here for You <br/>
             <span style={{ color: 'var(--red)' }}>Get Your Security Audit</span>
@@ -1462,6 +1479,7 @@ function ContactModal({ isOpen, onClose }) {
           maxHeight: '500px',
           overflowY: 'auto',
           paddingRight: '8px',
+          fontFamily: 'var(--body)',
         }}>
           {error && (
             <div style={{
@@ -1487,7 +1505,7 @@ function ContactModal({ isOpen, onClose }) {
               border: '1px solid rgba(255,255,255,0.1)',
               borderRadius: '8px',
               color: 'var(--text)',
-              fontFamily: 'var(--body)',
+              
               fontSize: '13px',
               padding: '10px 14px',
               outline: 'none',
@@ -1508,7 +1526,7 @@ function ContactModal({ isOpen, onClose }) {
               border: '1px solid rgba(255,255,255,0.1)',
               borderRadius: '8px',
               color: 'var(--text)',
-              fontFamily: 'var(--body)',
+             
               fontSize: '13px',
               padding: '10px 14px',
               outline: 'none',
@@ -1529,7 +1547,7 @@ function ContactModal({ isOpen, onClose }) {
               border: '1px solid rgba(255,255,255,0.1)',
               borderRadius: '8px',
               color: 'var(--text)',
-              fontFamily: 'var(--body)',
+           
               fontSize: '13px',
               padding: '10px 14px',
               outline: 'none',
@@ -1550,7 +1568,7 @@ function ContactModal({ isOpen, onClose }) {
               border: '1px solid rgba(255,255,255,0.1)',
               borderRadius: '8px',
               color: 'var(--text)',
-              fontFamily: 'var(--body)',
+             
               fontSize: '13px',
               padding: '10px 14px',
               outline: 'none',
@@ -1569,7 +1587,7 @@ function ContactModal({ isOpen, onClose }) {
               border: '1px solid rgba(255,255,255,0.1)',
               borderRadius: '8px',
               color: 'red',
-              fontFamily: 'var(--body)',
+             
               fontSize: '13px',
               padding: '10px 14px',
               outline: 'none',
@@ -1597,7 +1615,7 @@ function ContactModal({ isOpen, onClose }) {
               border: '1px solid rgba(255,255,255,0.1)',
               borderRadius: '8px',
               color: 'var(--text)',
-              fontFamily: 'var(--body)',
+              
               fontSize: '13px',
               padding: '10px 14px',
               outline: 'none',
@@ -1618,7 +1636,7 @@ function ContactModal({ isOpen, onClose }) {
               background: 'var(--red)',
               border: 'none',
               color: '#fff',
-              fontFamily: 'var(--body)',
+              fontFamily: 'var(--head)',
               fontSize: '13px',
               fontWeight: '700',
               cursor: loading ? 'not-allowed' : 'pointer',
@@ -1661,7 +1679,7 @@ export default function App() {
 
   return (
     <>
-      <Nav />
+      <Nav/>
       <Hero />
       <SOCDashboard />
       <ThreatMap />

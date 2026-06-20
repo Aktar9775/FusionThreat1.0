@@ -1,180 +1,109 @@
 ﻿import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Eye, AlertOctagon, Search, FileCheck, Target, Cloud, ArrowRight } from 'lucide-react';
 
-const services = [
+
+
+const SERVICES = [
   {
-    num: '01', 
-    icon: Eye, 
-    title: '24/7 Monitoring & Triage',
-    desc: 'Continuous visibility across endpoints, cloud, and network with real-time SIEM correlation and automated alerting.',
-    items: [
-      { label: 'Centralized SIEM log analysis', slug: 'siem-analysis' },
-      { label: 'Multi-source threat correlation', slug: 'threat-correlation' },
-      { label: 'Automated + human validation', slug: 'validation' },
-      { label: 'Cloud, network, endpoint coverage', slug: 'cloud-endpoint-coverage' },
-    ],
-    slug: 'monitoring-triage',
+    num: "01", title: "24/7 Monitoring & Triage",
+    desc: "Continuous visibility across endpoints, cloud, and network with real-time SIEM correlation and automated alerting.",
+    tags: ["Centralized SIEM log analysis", "Multi-source threat correlation", "Cloud, network, endpoint coverage","Automated + human validation"],
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /><path d="M6 8l3 3 2-2 3 4 2-2" /></svg>,
   },
   {
-    num: '02', 
-    icon: AlertOctagon, 
-    title: 'Incident Response',
-    desc: 'Speed is critical. Our IR team follows strict SLAs to isolate and neutralize attacks before significant damage occurs.',
-    items: [
-      { label: 'Critical response <15 minutes', slug: 'critical-response' },
-      { label: 'Threat isolation & containment', slug: 'containment' },
-      { label: 'Root cause analysis', slug: 'root-cause-analysis' },
-      { label: 'Post-incident reporting', slug: 'post-incident-reporting' },
-    ],
-    slug: 'incident-response',
+    num: "02", title: "Incident Response",
+    desc: "Speed is critical. Our IR team follows strict SLAs to isolate and neutralize attacks before significant damage occurs.",
+    tags: ["<15 min critical response", "Threat isolation & containment", "Root cause analysis", "Post-incident reporting"],
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L3 7v5c0 5 4 9.5 9 11 5-1.5 9-6 9-11V7L12 2z" /><path d="M12 8v4M12 16h.01" /></svg>,
   },
   {
-    num: '03', 
-    icon: Search, 
-    title: 'Vulnerability Management',
-    desc: 'Proactive identification of security gaps before attackers exploit them. Monthly assessments included.',
-    items: [
-      { label: 'Monthly vulnerability scans', slug: 'scanning' },
-      { label: 'Critical patching <24 hours', slug: 'critical-patching' },
-      { label: 'Penetration testing', slug: 'penetration-testing' },
-      { label: 'Remediation guidance', slug: 'remediation-guidance' },
-    ],
-    slug: 'vulnerability-management',
+    num: "03", title: "Vulnerability Management",
+    desc: "Proactive identification of security gaps before attackers exploit them. Monthly assessments included.",
+    tags: ["Monthly vulnerability scans", "Critical patching <24hr", "Penetration testing","Remediation guidance"],
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /><path d="M11 8v3l2 2" /></svg>,
   },
   {
-    num: '04', 
-    icon: FileCheck, 
-    title: 'Compliance Enablement',
-    desc: 'Navigate GDPR, HIPAA, SOC 2, and ISO 27001 with automated reporting, dashboards, and audit support.',
-    items: [
-      { label: 'Automated compliance dashboards', slug: 'automated-dashboard' },
-      { label: 'Audit preparation & support', slug: 'audit-support' },
-      { label: 'Gap analysis & planning', slug: 'gap-analysis' },
-      { label: 'Evidence collection', slug: 'evidence-collection' },
-    ],
-    slug: 'compliance-enablement',
+    num: "04", title: "Compliance Enablement",
+    desc: "Navigate GDPR, HIPAA, SOC 2, and ISO 27001 with automated reporting, dashboards, and audit support.",
+    tags: ["Automated Compliance dashboards", "Audit preparation & support", "Gap analysis & planning","Evidence collection "],
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" /><rect x="9" y="3" width="6" height="4" rx="1" /><path d="M9 12l2 2 4-4" /></svg>,
   },
   {
-    num: '05', 
-    icon: Target, 
-    title: 'Threat Hunting',
-    desc: 'Proactive search for hidden threats using XDR that evade automated detection systems.',
-    items: [
-      { label: 'Hypothesis-driven hunting', slug: 'hypothesis-hunting' },
-      { label: 'Behavioral pattern analysis', slug: 'behavioral-analysis' },
-      { label: 'IOC identification', slug: 'ioc-identification' },
-      { label: 'Detection rule improvement', slug: 'custom-detection-rules' },
-    ],
-    slug: 'threat-hunting',
+    num: "05", title: "Threat Hunting",
+    desc: "Proactive search for hidden threats using XDR that evade automated detection systems.",
+    tags: ["Hypothesis-driven & hunting", "Behavioral pattern analysis", "IOC identification","Custom detection rule development"],
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L3 7v5c0 5 4 9.5 9 11 5-1.5 9-6 9-11V7L12 2z" /><path d="M9 12l2 2 4-4M12 7v1" /></svg>,
   },
   {
-    num: '06', 
-    icon: Cloud, 
-    title: 'Cloud Security',
-    desc: 'Protect AWS, Azure, and GCP with dedicated cloud monitoring and posture management.',
-    items: [
-      { label: 'Cloud workload protection', slug: 'workload-protection' },
-      { label: 'Identity & access monitoring', slug: 'identity-access' },
-      { label: 'Misconfiguration detection', slug: 'misconfiguration' },
-      { label: 'Serverless security coverage', slug: 'serverless-security' },
-    ],
-    slug: 'cloud-security',
+    num: "06", title: "Cloud Security",
+    desc: "Protect AWS, Azure, and GCP with dedicated cloud monitoring and posture management.",
+    tags: ["Cloud Workload protection", "Identity & Access monitoring", "Misconfiguration detection","Serverless security coverage"],
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" /><path d="M12 14v-4M10 12l2-2 2 2" /></svg>,
   },
 ];
 
 export default function Services() {
-  const navigate = useNavigate();
-  const [active, setActive] = useState(null);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-
   return (
-    <section id="services" style={{ padding: '100px 24px' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <div style={{ marginBottom: 56 }}>
-          <div className="section-label">// Core Service Offerings</div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'clamp(28px, 4vw, 48px)', color: '#fff' }}>
-            Detect. Respond. Eliminate.
-          </h2>
-        </div>
+  <section id="services" className="section services">
+    <div className="container">
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 2, background: 'var(--border)' }}>
-          {services.map((s, i) => {
-            const isActive = active === i;
-            const isHovered = hoveredIndex === i;
-            return (
-              <div 
-                key={i}
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() => setActive(isActive ? null : i)}
-                className="card"
-                style={{
-                  padding: '32px 28px',
-                  cursor: 'pointer',
-                  background: isActive ? 'var(--green-dark)' : isHovered ? 'rgba(16, 185, 129, 0.05)' : 'var(--bg)',
-                  border: 'none',
-                  borderTop: isActive ? '2px solid var(--green)' : isHovered ? '2px solid var(--green)' : '1px solid transparent',
-                  transition: 'all 0.3s ease',
-                  position: 'relative',
-                  transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <div style={{ width: 40, height: 40, border: `1px solid ${isActive || isHovered ? 'var(--green)' : 'var(--border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'border-color 0.3s' }}>
-                      <s.icon size={18} color={isActive || isHovered ? 'var(--green)' : 'var(--text-dim)'} />
-                    </div>
-                  </div>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: isActive || isHovered ? 'var(--green)' : 'var(--text-muted)', letterSpacing: '0.1em' }}>{s.num}</span>
-                </div>
+      {/* ✅ Wrap heading for better control */}
+      <div className="section__header">
+        <h2 className="services__heading">
+  Detect{" "}
+  <span className="icon">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
+    </svg>
+  </span>
+  {" "}Respond{" "}
+  <span className="icon">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M13 7h-6l4 5l-4 5h6l4 -5l-4 -5" />
+    </svg>
+  </span>
+  {" "} <span style={{ color: "#f7161e" }}>Eliminate</span>
+</h2>
 
-                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 18, color: isActive || isHovered ? 'var(--green)' : '#fff', marginBottom: 10, transition: 'color 0.3s' }}>
-                  {s.title}
-                </h3>
-                <p style={{ color: 'var(--text-dim)', fontSize: 14, lineHeight: 1.6, marginBottom: isActive ? 16 : 0 }}>{s.desc}</p>
-
-                {isActive && (
-                  <ul style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 16 }}>
-                    {s.items.map((item, j) => (
-                      <li key={j} onClick={(e) => { e.stopPropagation(); navigate(`/service/${item.slug}`); }} style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text)', cursor: 'pointer' }}>
-                        <span style={{ color: 'var(--green)' }}>â€º</span> {item}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {(isActive || isHovered) && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      navigate(`/service/${s.slug}`);
-                    }}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      padding: '10px 16px',
-                      background: 'transparent',
-                      border: '1px solid var(--green)',
-                      color: 'var(--green)',
-                      borderRadius: 4,
-                      cursor: 'pointer',
-                      fontFamily: 'var(--font-display)',
-                      fontSize: 12,
-                      fontWeight: 600,
-                      transition: 'all 0.3s',
-                    }}
-                  >
-                    Explore Details <ArrowRight size={14} />
-                  </button>
-                )}
-              </div>
-            );
-          })}
-        </div>
+        
+        {/* <ThreatMapCanvas /> */}
       </div>
-    </section>
-  );
+
+      {/* ✅ Services Grid */}
+      <div className="services__grid">
+        {SERVICES.map((s) => (
+          <div key={s.num} className="service-card glass-card">
+            <div className="service-card__svg-icon">{s.icon}</div>
+            <h3 className="service-card__title">{s.title}</h3>
+            <p className="service-card__desc">{s.desc}</p>
+
+            <div className="service-card__tags">
+              {s.tags.map((t) => (
+                <span key={t} className="tag tag--dim">{t}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>)
 }
 
